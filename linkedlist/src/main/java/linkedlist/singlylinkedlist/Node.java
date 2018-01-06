@@ -1,8 +1,18 @@
 package linkedlist.singlylinkedlist;
 
+/*
+ * This class is for singly linked list nodes
+ */
 public class Node<T> implements Comparable<T> {
 	private T t;
 	private Node<T> next;
+	
+	public Node(){
+		
+	}
+	public Node(T t){
+		this.t = t;
+	}
 	
 	public void setItem(T t){
 		this.t = t;
@@ -17,6 +27,12 @@ public class Node<T> implements Comparable<T> {
 		return next;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 * 
+	 * This comparator will compare the nodes t values alone
+	 */
 	public int compareTo(Object node) {
 		if(node instanceof Node){
 			if(this.t.equals(((Node) node).t)){
