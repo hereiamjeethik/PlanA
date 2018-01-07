@@ -56,4 +56,9 @@ public class Node<T> implements Comparable<T> {
 		return false;
 	}
 	
+	@Override
+	public String toString(){
+		return t.toString();
+	}
+	
 }

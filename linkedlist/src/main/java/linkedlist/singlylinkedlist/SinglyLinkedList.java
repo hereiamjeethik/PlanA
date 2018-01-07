@@ -280,6 +280,57 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * This method searches the element in the list iteratively
+	 * @param t is the value to be searched 
+	 * @return Node is the Node that has the value that we are searching
+	 */
+	public Node<T> searchIteratively(T t){
+		System.out.println("Searching iteratively the value: "+t);
+		Node<T> currNode = head;
+		if(currNode == null){
+			return null;
+		}else{
+			while(currNode != null){
+				if(currNode.getItem().equals(t)){
+					return currNode;
+				}else{
+					currNode = currNode.getNext();
+				}
+			}
+			
+			return null;
+		}
+	}
+	
+	/**
+	 * This method searches the element in the list recursively
+	 * @param t
+	 * @return
+	 */
+	public Node<T> searchRecursively(T t){
+		System.out.println("Searching iteratively the value: "+t);
+		Node<T> currNode = head;
+		return search(currNode,t);
+	}
+	
+	/**
+	 * This is the recursive call to search an element
+	 * @param currNode
+	 * @param value
+	 * @return
+	 */
+	private Node<T> search(Node<T> currNode, T value){
+		if(currNode == null){
+			return null;
+		}else{
+			if(currNode.getItem().equals(value)){
+				return currNode;
+			}else{
+				return search(currNode.getNext(), value);
+			}
+		}
+	}
 	
 	public void printList(){
 		Node<T> currNode = head;
@@ -343,6 +394,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.insertNode(node9, 3);
 		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());
 		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());
+		Node searchedNode1 = sll.searchIteratively(4);
+		System.out.println(searchedNode1);
+		Node searchedNode2 = sll.searchRecursively(1);
+		System.out.println(searchedNode2);
 		sll.printList();
 		sll.deleteDuplicateNodeUsingKey(3, false, true, false, false, false); // deleting the first duplicated element
 		sll.printList();
@@ -377,6 +432,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());
 		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());
+		Node searchedNode3 = sll.searchIteratively(4);
+		System.out.println(searchedNode3);
+		Node searchedNode4 = sll.searchRecursively(1);
+		System.out.println(searchedNode4);
 	}
 
 
