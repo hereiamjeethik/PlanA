@@ -240,6 +240,47 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	
+	
+	/**
+	 * This method finds the length of the list iteratively.
+	 */
+	public int getLengthIteratively(){
+		if(head == null){
+			return 0;
+		}else{
+			Node<T> currNode = head; int count = 0;
+			while(currNode != null){
+				currNode= currNode.getNext();
+				count++;
+			}
+			return count;
+		}
+	}
+	
+	/**
+	 * This method finds length of the list recursively.
+	 */
+	public int getLengthRecursively(){
+		Node<T> currNode = head;
+		int count = 0;
+		count = getLength(currNode);
+		return count;
+	}
+	
+	/**
+	 * Recursive code to find the length
+	 * 
+	 */
+	private int getLength(Node<T> currNode){
+		if(currNode == null){
+			return 0;
+		}else{
+			return 1+getLength(currNode.getNext());
+		}
+	}
+	
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -300,6 +341,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.insertNode(node8, 3);
 		Node<Integer> node9 = new Node<Integer>(3);
 		sll.insertNode(node9, 3);
+		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());
+		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());
 		sll.printList();
 		sll.deleteDuplicateNodeUsingKey(3, false, true, false, false, false); // deleting the first duplicated element
 		sll.printList();
@@ -332,6 +375,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.deleteNodeUsingPosition(0); // deleting the head element
 		sll.printList();
+		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());
+		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());
 	}
 
 
