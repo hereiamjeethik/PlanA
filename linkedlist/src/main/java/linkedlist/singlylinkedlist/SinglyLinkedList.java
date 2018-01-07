@@ -332,6 +332,73 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * swap nodes in the list without swapping data
+	 * @param t1
+	 * @param t2
+	 * 
+	 * Cases that are handled is
+	 * 1.	One of the node is head
+	 * 2.	One of the node is tail
+	 * 3.	If only 2 nodes are there
+	 * 4.	if nodes are adjacent to each other
+	 * 5.	if nodes are not adjacent
+	 */
+	public void swap(T t1, T t2){
+		System.out.println("Swapping "+t1+" "+t2);
+		Node<T> currNode = head, prevNode = null, firstPrevNode = null, secondPrevNode = null;
+		boolean isFirstNode = true;
+		while(currNode != null){
+			if(currNode.getItem().equals(t1) || currNode.getItem().equals(t2)){
+				if(isFirstNode){
+					firstPrevNode = prevNode;
+					isFirstNode = false;
+				}else{
+					secondPrevNode = prevNode;
+					break;
+				}
+			}
+			prevNode = currNode;
+			currNode = currNode.getNext();
+		}
+		System.out.println("firstPrevNode "+firstPrevNode);
+		System.out.println("secondPrevNode "+secondPrevNode);
+		if(firstPrevNode != null){   // first node is not the head
+			if(secondPrevNode.equals(firstPrevNode.getNext())){
+				firstPrevNode.setNext(secondPrevNode.getNext());
+				secondPrevNode.setNext(secondPrevNode.getNext().getNext());
+				firstPrevNode.getNext().setNext(secondPrevNode);
+			}else{
+				Node<T> temp1 = firstPrevNode.getNext();
+				Node<T> temp2 = temp1.getNext();
+				Node<T> temp3 = secondPrevNode.getNext();
+				Node<T> temp4 = temp3.getNext();
+				
+				firstPrevNode.setNext(temp3);
+				temp3.setNext(temp2);
+				secondPrevNode.setNext(temp1);
+				temp1.setNext(temp4);
+			}
+		}else{  // first node is the head
+			if(secondPrevNode.equals(head)){
+				head = secondPrevNode.getNext();
+				secondPrevNode.setNext(head.getNext());
+				head.setNext(secondPrevNode);
+			}else{
+				Node<T> temp1 = head;
+				Node<T> temp2 = temp1.getNext();
+				Node<T> temp3 = secondPrevNode.getNext();
+				Node<T> temp4 = temp3.getNext();
+				
+				head = temp3;
+				temp3.setNext(temp2);
+				secondPrevNode.setNext(temp1);
+				temp1.setNext(temp4);
+				
+			}
+		}
+	}
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -384,6 +451,16 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.deleteNodeUsingKey(5); // delete the tail element
 		sll.printList();
+		sll.swap(2, 1);
+		sll.printList();
+		sll.swap(1, 3);
+		sll.printList();
+		sll.swap(3, 4);
+		sll.printList();
+		sll.swap(2, 1);
+		sll.printList();
+		sll.swap(3, 2);
+		sll.printList();
 		Node<Integer> node6 = new Node<Integer>(3);
 		sll.insertNode(node6, 0);
 		Node<Integer> node7 = new Node<Integer>(3);
@@ -419,6 +496,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.deleteDuplicateNodeUsingKey(3, true, false, false, false, false); // deleting all the duplicated element
 		sll.printList();
 		sll.deleteNodeUsingPosition(1);  // deleting the middle element
+		sll.printList();
+		sll.swap(4, 2);
 		sll.printList();
 		sll.deleteNodeUsingPosition(1); // deleting the tail element
 		sll.printList();
