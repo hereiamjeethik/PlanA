@@ -419,6 +419,30 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 	}
 	
+	/**
+	 * This method returns the middle of the given list
+	 * 
+	 * @param firstMiddle, it is true, if you want the first node of the middle. in case of even numbered list
+	 * @return
+	 */
+	public Node<T> getMiddleNodeFromList(boolean firstMiddle){
+		
+		Node<T> oneStepPtr = head, twoStepPtr = head;
+		while(twoStepPtr != null && twoStepPtr.getNext() != null){
+			twoStepPtr = twoStepPtr.getNext().getNext();
+			if(firstMiddle && twoStepPtr == null){
+				System.out.println("First Middle Element of the list is "+oneStepPtr);
+				return oneStepPtr;
+			}else if(firstMiddle){
+				oneStepPtr = oneStepPtr.getNext();
+			}else{
+				oneStepPtr = oneStepPtr.getNext();
+			}
+		}
+		System.out.println("Middle Element of the list is "+oneStepPtr);
+		return oneStepPtr;
+	}
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -470,6 +494,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.insertNode(node5, 10); // insert into tail and the position is high
 		sll.printList();
 		sll.deleteNodeUsingKey(5); // delete the tail element
+		
+		
 		sll.printList();
 		sll.swap(2, 1);  // swapping head node with other node
 		sll.printList();
@@ -481,6 +507,11 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.swap(3, 2);  //   swapping non adjacent nodes
 		sll.printList();
+		
+		System.out.println(sll.getMiddleNodeFromList(true));
+		System.out.println(sll.getMiddleNodeFromList(false));
+		
+		
 		Node<Integer> node6 = new Node<Integer>(3);
 		sll.insertNode(node6, 0);
 		Node<Integer> node7 = new Node<Integer>(3);
@@ -489,17 +520,25 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.insertNode(node8, 3);
 		Node<Integer> node9 = new Node<Integer>(3);
 		sll.insertNode(node9, 3);
+		
+		
 		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());  // get the length of the list iteratively
 		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());  // get the length of the list recursively
+		
+		
 		Node searchedNode1 = sll.searchIteratively(4);  // search an element iteratively
 		System.out.println(searchedNode1);
 		Node searchedNode2 = sll.searchRecursively(1);  // search an element recursively
 		System.out.println(searchedNode2);
 		sll.printList();
+		
+		
 		System.out.println(sll.getNthNode(5));   // get the nth node
 		System.out.println(sll.getNthNode(6));
 		System.out.println(sll.getNthNode(1));
 		System.out.println(sll.getNthNode(0));
+		
+		
 		sll.deleteDuplicateNodeUsingKey(3, false, true, false, false, false); // deleting the first duplicated element
 		sll.printList();
 		sll.insertNode(node6, 0);
@@ -519,6 +558,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.deleteDuplicateNodeUsingKey(3, true, false, false, false, false); // deleting all the duplicated element
 		sll.printList();
+		
+		
 		sll.deleteNodeUsingPosition(1);  // deleting the middle element
 		sll.printList();
 		sll.swap(4, 2);
@@ -534,8 +575,12 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.deleteNodeUsingPosition(0); // deleting the head element
 		sll.printList();
+		
+		
 		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());
 		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());
+		
+		
 		Node searchedNode3 = sll.searchIteratively(4);
 		System.out.println(searchedNode3);
 		Node searchedNode4 = sll.searchRecursively(1);
