@@ -466,6 +466,25 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return ptrNode;
 	}
 	
+	/***
+	 * This method returns the number of occurrences of a key in the list
+	 * 
+	 * @param t
+	 * @return
+	 */
+	public int getNumberOfKeyOccurrence(T t){
+		Node<T> currNode = head;
+		int count = 0;
+		while(currNode != null){
+			if(currNode.getItem().equals(t)){
+				count++;
+			}
+			currNode = currNode.getNext();
+		}
+		System.out.println(t+" occurred "+count+" time(s)");
+		return count;
+	}
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -560,6 +579,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println(searchedNode2);
 		sll.printList();
 		
+		System.out.println(sll.getNumberOfKeyOccurrence(3));
+		System.out.println(sll.getNumberOfKeyOccurrence(8));
 		
 		System.out.println(sll.getNthNode(5));   // get the nth node
 		System.out.println(sll.getNthNode(6));
