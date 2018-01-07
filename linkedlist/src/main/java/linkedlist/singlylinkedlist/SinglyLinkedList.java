@@ -443,6 +443,29 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return oneStepPtr;
 	}
 	
+	/**
+	 * 
+	 * @param position, the position of element from end
+	 * @return the Node at position from the end
+	 */
+	public Node<T> getNthNodeFromEnd(int position){
+		Node<T> currNode = head, ptrNode = null;
+		int currPos = 0;
+		while(currNode != null){
+			if(currPos >= position){
+				if(ptrNode == null){
+					ptrNode=head;
+				}else{
+					ptrNode=ptrNode.getNext();
+				}
+			}
+			currPos++;
+			currNode = currNode.getNext();
+		}
+		System.out.println(position+"th Node from the End is :"+ptrNode);
+		return ptrNode;
+	}
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -493,6 +516,11 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		Node<Integer> node5 = new Node<Integer>(5);
 		sll.insertNode(node5, 10); // insert into tail and the position is high
 		sll.printList();
+		
+		
+		System.out.println(sll.getNthNodeFromEnd(0));
+		System.out.println(sll.getNthNodeFromEnd(4));
+		
 		sll.deleteNodeUsingKey(5); // delete the tail element
 		
 		
