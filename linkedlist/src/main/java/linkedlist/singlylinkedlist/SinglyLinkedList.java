@@ -361,8 +361,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 			prevNode = currNode;
 			currNode = currNode.getNext();
 		}
-		System.out.println("firstPrevNode "+firstPrevNode);
-		System.out.println("secondPrevNode "+secondPrevNode);
 		if(firstPrevNode != null){   // first node is not the head
 			if(secondPrevNode.equals(firstPrevNode.getNext())){
 				firstPrevNode.setNext(secondPrevNode.getNext());
@@ -473,15 +471,15 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.deleteNodeUsingKey(5); // delete the tail element
 		sll.printList();
-		sll.swap(2, 1);
+		sll.swap(2, 1);  // swapping head node with other node
 		sll.printList();
-		sll.swap(1, 3);
+		sll.swap(1, 3);  // swapping head and its next node
 		sll.printList();
-		sll.swap(3, 4);
+		sll.swap(3, 4);  //  swapping head and tail node
 		sll.printList();
-		sll.swap(2, 1);
+		sll.swap(2, 1);  //  swapping adjacent nodes  
 		sll.printList();
-		sll.swap(3, 2);
+		sll.swap(3, 2);  //   swapping non adjacent nodes
 		sll.printList();
 		Node<Integer> node6 = new Node<Integer>(3);
 		sll.insertNode(node6, 0);
@@ -491,14 +489,14 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.insertNode(node8, 3);
 		Node<Integer> node9 = new Node<Integer>(3);
 		sll.insertNode(node9, 3);
-		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());
-		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());
-		Node searchedNode1 = sll.searchIteratively(4);
+		System.out.println("length of the list in iterative way : "+sll.getLengthIteratively());  // get the length of the list iteratively
+		System.out.println("length of the list in recursive way : "+sll.getLengthRecursively());  // get the length of the list recursively
+		Node searchedNode1 = sll.searchIteratively(4);  // search an element iteratively
 		System.out.println(searchedNode1);
-		Node searchedNode2 = sll.searchRecursively(1);
+		Node searchedNode2 = sll.searchRecursively(1);  // search an element recursively
 		System.out.println(searchedNode2);
 		sll.printList();
-		System.out.println(sll.getNthNode(5));
+		System.out.println(sll.getNthNode(5));   // get the nth node
 		System.out.println(sll.getNthNode(6));
 		System.out.println(sll.getNthNode(1));
 		System.out.println(sll.getNthNode(0));
