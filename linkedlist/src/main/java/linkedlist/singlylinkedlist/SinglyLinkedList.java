@@ -399,6 +399,28 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * This method returns the Node at the given position
+	 * 
+	 * @param position, this specifies the position of the node that needs to be returned
+	 * @return Node, the Node in position given is returned.
+	 */
+	public Node<T> getNthNode(int position){
+		int currPos = 0;
+		Node<T> currNode = head;
+		if(currNode == null || position > getLength(currNode)){
+			return null;
+		}else{
+			while(currNode != null && currPos < position){
+				currNode = currNode.getNext();
+				currPos++;
+			}
+			System.out.println("The Node "+currNode+ " is in position "+position);
+			return currNode;
+		}
+		
+	}
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -476,6 +498,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		Node searchedNode2 = sll.searchRecursively(1);
 		System.out.println(searchedNode2);
 		sll.printList();
+		System.out.println(sll.getNthNode(5));
+		System.out.println(sll.getNthNode(6));
+		System.out.println(sll.getNthNode(1));
+		System.out.println(sll.getNthNode(0));
 		sll.deleteDuplicateNodeUsingKey(3, false, true, false, false, false); // deleting the first duplicated element
 		sll.printList();
 		sll.insertNode(node6, 0);
@@ -501,6 +527,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.deleteNodeUsingPosition(1); // deleting the tail element
 		sll.printList();
+		System.out.println(sll.getNthNode(2));
 		try{
 			sll.deleteNodeUsingPosition(1); // deleting the element position that is not there in the list
 		}catch(RuntimeException e){
