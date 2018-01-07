@@ -110,6 +110,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	 * 3.	Remove the middle element of the duplicates
 	 * 4.	Remove the odd/even number of duplicate elements
 	 * 		a.	collect all the duplicates and remove only the elements that are occurred in odd/even numbers
+	 * 
+	 * TODO : removing middle element of all the duplicates
 	 */
 	public void deleteDuplicateNodeUsingKey(T t, boolean deleteAll, boolean deleteFirst, boolean deleteLast, boolean deleteMiddle, boolean deleteOdd){
 		Node<T> currNode = head, prevNode = null, prevToLastNode = null;
@@ -158,6 +160,83 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 			System.out.println("Deleting the last duplicated element "+t);
 			
 			return;
+		}else if(deleteOdd){
+			boolean odd = false;
+			while(currNode != null){
+				if(currNode.getItem().equals(t)){
+					if(odd){
+						if(prevNode == null){
+							head = currNode.getNext();
+						}else{
+							prevNode.setNext(currNode.getNext());
+						}
+						currNode = currNode.getNext();
+						odd = false;
+					}else{
+						odd = true;
+						prevNode = currNode;
+						currNode = currNode.getNext();
+					}
+				}else{
+					prevNode = currNode;
+					currNode = currNode.getNext();
+				}
+			}
+			System.out.println("Deleting the odd duplicated element "+t);
+			return;
+		}else{
+			boolean even = true;
+			while(currNode != null){
+				if(currNode.getItem().equals(t)){
+					if(even){
+						if(prevNode == null){
+							head = currNode.getNext();
+						}else{
+							prevNode.setNext(currNode.getNext());
+						}
+						currNode = currNode.getNext();
+						even = false;
+					}else{
+						even = true;
+						prevNode = currNode;
+						currNode = currNode.getNext();
+					}
+				}else{
+					prevNode = currNode;
+					currNode = currNode.getNext();
+				}
+			}
+			System.out.println("Deleting the even duplicated element "+t);
+			return;
+		}
+	}
+	
+	/**
+	 * @param position
+	 * position is denoting the position of the elements that needs to be deleted.
+	 * 
+	 */
+	public void deleteNodeUsingPosition(int position){
+		int currPos = 0;
+		Node<T> currNode = head, prevNode = null;
+		while(currPos < position && currNode != null){
+			prevNode = currNode;
+			currNode = currNode.getNext();
+			currPos++;
+		}
+		if(currPos == position){
+			if(currNode != null){
+				if(prevNode == null){
+					head = currNode.getNext();
+				}else{
+					prevNode.setNext(currNode.getNext());
+				}
+			}else{
+				throw new RuntimeException("Position is greater than the length of the list");
+			}
+			
+		}else{
+			throw new RuntimeException("Position is greater than the length of the list");
 		}
 	}
 	
@@ -230,7 +309,28 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.insertNode(node7, 9);
 		sll.printList();
+		sll.deleteDuplicateNodeUsingKey(3, false, false, false, false, true); // deleting odd duplicated elements
+		sll.printList();
+		Node<Integer> node10 = new Node<Integer>(3);
+		sll.insertNode(node10, 2);
+		Node<Integer> node11 = new Node<Integer>(3);
+		sll.insertNode(node11, 2);
+		sll.printList();
+		sll.deleteDuplicateNodeUsingKey(3, false, false, false, false, false); // deleting even duplicated elements
+		sll.printList();
 		sll.deleteDuplicateNodeUsingKey(3, true, false, false, false, false); // deleting all the duplicated element
+		sll.printList();
+		sll.deleteNodeUsingPosition(1);  // deleting the middle element
+		sll.printList();
+		sll.deleteNodeUsingPosition(1); // deleting the tail element
+		sll.printList();
+		try{
+			sll.deleteNodeUsingPosition(1); // deleting the element position that is not there in the list
+		}catch(RuntimeException e){
+			// do nothing
+		}
+		sll.printList();
+		sll.deleteNodeUsingPosition(0); // deleting the head element
 		sll.printList();
 	}
 
