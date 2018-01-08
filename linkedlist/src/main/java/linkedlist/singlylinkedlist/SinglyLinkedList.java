@@ -485,6 +485,26 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return count;
 	}
 	
+	
+	/**
+	 * This method reverses the linked list
+	 */
+	public void reverseList(){
+		System.out.println("Reversing the linked list");
+		Node<T> currNode = head, prevNode = null, nextNode = null;
+		while(currNode != null){
+			nextNode = currNode.getNext();
+			currNode.setNext(prevNode);
+			prevNode = currNode;
+			if(nextNode == null){
+				head = currNode;
+				return;
+			}else{
+				currNode = nextNode;
+			}
+		}
+	}
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -603,9 +623,20 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		Node<Integer> node11 = new Node<Integer>(3);
 		sll.insertNode(node11, 2);
 		sll.printList();
+		
+		sll.reverseList();
+		sll.printList();
+		
 		sll.deleteDuplicateNodeUsingKey(3, false, false, false, false, false); // deleting even duplicated elements
 		sll.printList();
+		
+		sll.reverseList();
+		sll.printList();
+		
 		sll.deleteDuplicateNodeUsingKey(3, true, false, false, false, false); // deleting all the duplicated element
+		sll.printList();
+		
+		sll.reverseList();
 		sll.printList();
 		
 		
@@ -613,6 +644,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.swap(4, 2);
 		sll.printList();
+		
+		sll.reverseList();
+		sll.printList();
+		
 		sll.deleteNodeUsingPosition(1); // deleting the tail element
 		sll.printList();
 		System.out.println(sll.getNthNode(2));
@@ -621,6 +656,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}catch(RuntimeException e){
 			// do nothing
 		}
+		sll.printList();
+		sll.reverseList();
 		sll.printList();
 		sll.deleteNodeUsingPosition(0); // deleting the head element
 		sll.printList();
