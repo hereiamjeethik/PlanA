@@ -17,6 +17,14 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	private Node<T> head;
 	
 	/**
+	 * This method returns the head of the linked list
+	 * @return
+	 */
+	public Node<T> getList(){
+		return head;
+	}
+	
+	/**
 	 * @param newNode, position
 	 * newNode is the node to be inserted in the specified position
 	 * 
@@ -552,8 +560,87 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return false;
 	}
 	
+	/**
+	 * TODO: need to understand why generic is not working here
+	 * @param list1
+	 * @param list2
+	 * @return
+	 */
+	public static SinglyLinkedList<Integer> mergeSortedList (SinglyLinkedList<Integer> list1, SinglyLinkedList<Integer> list2){
+		System.out.println("Merging the Sorted linked list iteratively");
+		SinglyLinkedList<Integer> mergedList = new SinglyLinkedList<Integer>();
+		if(list1 == null){
+			return mergedList = list2;
+		}else if(list2 == null){
+			return mergedList = list1;
+		}else{
+			Node<Integer> curr1 = list1.getList();
+			Node<Integer> curr2 = list2.getList();
+			while(curr1 != null && curr2 != null){
+				if(curr1.getItem() > curr2.getItem()){
+					mergedList.insertNode(new Node<Integer>(curr2.getItem()), Integer.MAX_VALUE);
+					curr2 = curr2.getNext();
+				}else{
+					mergedList.insertNode(new Node<Integer>(curr1.getItem()), Integer.MAX_VALUE);
+					curr1= curr1.getNext();
+				}
+			}
+			
+			if(curr1 == null){
+				while(curr2 != null){
+					mergedList.insertNode(new Node<Integer>(curr2.getItem()), Integer.MAX_VALUE);
+					curr2 = curr2.getNext();
+				}
+			}else{
+				while(curr1 != null){
+					mergedList.insertNode(new Node<Integer>(curr1.getItem()), Integer.MAX_VALUE);
+					curr1 = curr1.getNext();
+				}
+			}
+		}
+		
+		return mergedList;
+	}
+	
+	/**
+	 * This method returns the merged linked list of 2 sorted list
+	 * @param head1
+	 * @param head2
+	 * @return
+	 */
+	public static Node<Integer> mergeSortedListRecursively(Node<Integer> head1, Node<Integer> head2){
+		if(head1 == null){
+			return head2;
+		}else if(head2 == null){
+			return head1;
+		}else{
+			if(head1.getItem() < head2.getItem()){
+				head1.setNext(mergeSortedListRecursively(head1.getNext(), head2));
+				return head1;
+			}else{
+				head2.setNext(mergeSortedListRecursively(head1, head2.getNext()));
+				return head2;
+			}
+		}
+	}
 	
 	public void printList(){
+		Node<T> currNode = head;
+		System.out.println("Printing the list of nodes");
+		if(currNode == null){
+			System.out.println("no nodes");
+		}else{
+			while(currNode != null){
+				System.out.print(currNode.getItem()+" --> ");
+				currNode= currNode.getNext();
+			}
+			System.out.println("");
+		}
+		
+		
+	}
+	
+	public void printList(Node<T> head){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
 		if(currNode == null){
@@ -738,7 +825,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println(searchedNode4);
 		
 		SinglyLinkedList<Integer> sll2 = new SinglyLinkedList<Integer>();
-		Node nodex = new Node(10);
+		Node<Integer> nodex = new Node<Integer>(10);
 		Node nodey = new Node(11);
 		Node nodez = new Node(12);
 		nodex.setNext(nodey);
@@ -746,6 +833,30 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		nodez.setNext(nodex);
 		sll2.insertNode(nodex, 0);
 		System.out.println(sll2.isCyclicList());
+		
+		
+		SinglyLinkedList<Integer> sll3 = new SinglyLinkedList<Integer>();
+		Node nodea = new Node(1);
+		Node nodeb = new Node(3);
+		Node nodec = new Node(5);
+		sll3.insertNode(nodea, 0);
+		sll3.insertNode(nodeb, 1);
+		sll3.insertNode(nodec, 2);
+		sll3.printList();
+		SinglyLinkedList<Integer> sll4 = new SinglyLinkedList<Integer>();
+		Node nodei = new Node(2);
+		Node nodej = new Node(4);
+		Node nodek = new Node(6);
+		sll4.insertNode(nodei, 0);
+		sll4.insertNode(nodej, 1);
+		sll4.insertNode(nodek, 2);
+		sll4.printList();
+		SinglyLinkedList<Integer> sll5 = mergeSortedList(sll3, sll4);
+		sll5.printList();
+		
+		Node<Integer> head = mergeSortedListRecursively(sll3.getList(), sll4.getList());
+		System.out.println("Merging sorted linked list recursively");
+		sll5.printList(head);
 		
 	}
 
