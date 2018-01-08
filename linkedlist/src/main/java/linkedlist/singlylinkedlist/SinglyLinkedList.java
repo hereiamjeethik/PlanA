@@ -535,7 +535,22 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
-	
+	/**
+	 * This method returns true when there is a cyscle, otherwise false.
+	 * @return boolean
+	 */
+	public boolean isCyclicList(){
+		System.out.println("Checking for Cycle in the list");
+		Node<T> currNode = head,oneStepPtr = head,twoStepPtr = head;
+		while(twoStepPtr != null && twoStepPtr.getNext() != null){
+			oneStepPtr = oneStepPtr.getNext();
+			twoStepPtr = twoStepPtr.getNext().getNext();
+			if(oneStepPtr == twoStepPtr){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	public void printList(){
@@ -690,6 +705,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.reverseRecursively();
 		sll.printList();
+		System.out.println(sll.isCyclicList());
 		
 		
 		sll.deleteNodeUsingPosition(1); // deleting the tail element
@@ -705,6 +721,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.printList();
 		sll.reverseRecursively();
 		sll.printList();
+		System.out.println(sll.isCyclicList());
 		
 		sll.printList();
 		sll.deleteNodeUsingPosition(0); // deleting the head element
@@ -719,6 +736,17 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println(searchedNode3);
 		Node searchedNode4 = sll.searchRecursively(1);
 		System.out.println(searchedNode4);
+		
+		SinglyLinkedList<Integer> sll2 = new SinglyLinkedList<Integer>();
+		Node nodex = new Node(10);
+		Node nodey = new Node(11);
+		Node nodez = new Node(12);
+		nodex.setNext(nodey);
+		nodey.setNext(nodez);
+		nodez.setNext(nodex);
+		sll2.insertNode(nodex, 0);
+		System.out.println(sll2.isCyclicList());
+		
 	}
 
 
