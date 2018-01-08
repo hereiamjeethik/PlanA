@@ -10,6 +10,7 @@ import java.util.Iterator;
  * TODO 1: Do the Iterator.
  * TODO 2: Do the Thread-Safe code.
  * TODO 3: write unit test cases for all the functions and cases.
+ * TODO 4: There is a bug in the code, which needs to be fixed
  *
  */
 public class SinglyLinkedList<T> implements Iterable<T> {
@@ -487,7 +488,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	
 	
 	/**
-	 * This method reverses the linked list
+	 * This method reverses the linked list iteratively
 	 */
 	public void reverseList(){
 		System.out.println("Reversing the linked list");
@@ -504,6 +505,38 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 			}
 		}
 	}
+	
+	
+	/**
+	 * This method reverses the linked list recursively
+	 */
+	public void reverseRecursively(){
+		System.out.println("Reversing the list recursively");
+		Node<T> currNode = head;
+		if(currNode != null){
+			reverse(currNode);
+			currNode.setNext(null);
+		}
+	}
+	
+	/**
+	 * This is a private method to reverse
+	 * @param currNode
+	 * @return
+	 */
+	private Node<T> reverse(Node<T> currNode){
+		if(currNode.getNext() == null){
+			head = currNode;
+			return currNode;
+		}else{
+			Node<T> prevNode = reverse(currNode.getNext());
+			prevNode.setNext(currNode);
+			return currNode;
+		}
+	}
+	
+	
+	
 	
 	public void printList(){
 		Node<T> currNode = head;
@@ -626,17 +659,25 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		sll.reverseList();
 		sll.printList();
+		sll.reverseRecursively();
+		sll.printList();
+		
 		
 		sll.deleteDuplicateNodeUsingKey(3, false, false, false, false, false); // deleting even duplicated elements
 		sll.printList();
 		
 		sll.reverseList();
 		sll.printList();
+		sll.reverseRecursively();
+		sll.printList();
+		
 		
 		sll.deleteDuplicateNodeUsingKey(3, true, false, false, false, false); // deleting all the duplicated element
 		sll.printList();
 		
 		sll.reverseList();
+		sll.printList();
+		sll.reverseRecursively();
 		sll.printList();
 		
 		
@@ -647,6 +688,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		sll.reverseList();
 		sll.printList();
+		sll.reverseRecursively();
+		sll.printList();
+		
 		
 		sll.deleteNodeUsingPosition(1); // deleting the tail element
 		sll.printList();
@@ -658,6 +702,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 		sll.printList();
 		sll.reverseList();
+		sll.printList();
+		sll.reverseRecursively();
+		sll.printList();
+		
 		sll.printList();
 		sll.deleteNodeUsingPosition(0); // deleting the head element
 		sll.printList();
