@@ -624,6 +624,34 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * This method inserts a node in the sorted linked list and preserves the sorting after insertion
+	 * @param head
+	 * @param newNode
+	 * @return
+	 */
+	public Node<Integer> sortedInsertion(Node<Integer> head, Node<Integer> newNode){
+		System.out.println("Inserting the value : "+newNode.getItem()+" in the sorted list");
+		Node<Integer> currNode = head, prevNode = null;
+		while(currNode != null){
+			if(currNode.getItem() > newNode.getItem()){
+				if(prevNode == null){
+					newNode.setNext(currNode);
+					return newNode;
+				}else{
+					prevNode.setNext(newNode);
+					newNode.setNext(currNode);
+					return head;
+				}
+			}else{
+				prevNode = currNode;
+				currNode = currNode.getNext();
+			}
+		}
+		return head;
+	}
+	
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -843,16 +871,19 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll3.insertNode(nodeb, 1);
 		sll3.insertNode(nodec, 2);
 		sll3.printList();
+		sll3.printList(sll3.sortedInsertion(sll3.getList(),new Node(3)));
+		
 		SinglyLinkedList<Integer> sll4 = new SinglyLinkedList<Integer>();
 		Node nodei = new Node(2);
 		Node nodej = new Node(4);
-		Node nodek = new Node(6);
+		Node nodek = new Node(7);
 		sll4.insertNode(nodei, 0);
 		sll4.insertNode(nodej, 1);
 		sll4.insertNode(nodek, 2);
 		sll4.printList();
 		SinglyLinkedList<Integer> sll5 = mergeSortedList(sll3, sll4);
 		sll5.printList();
+		sll5.printList(sll5.sortedInsertion(sll5.getList(), new Node(6)));
 		
 		Node<Integer> head = mergeSortedListRecursively(sll3.getList(), sll4.getList());
 		System.out.println("Merging sorted linked list recursively");
