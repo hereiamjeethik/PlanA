@@ -759,6 +759,34 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 	}
 	
+	/**
+	 * print the list in a reverse order
+	 * @param head
+	 */
+	public void printReverse(Node<T> head){
+		System.out.println("Printing the list in reverse order");
+		if(head == null){
+			System.out.println("no nodes");
+		}else{
+			System.out.println(printReverseRecursive(head)+" --> ");
+		}
+	}
+	
+	/**
+	 * Private method to print the method in reverse order
+	 * @param currNode
+	 * @return
+	 */
+	private Node<T> printReverseRecursive(Node<T> currNode){
+		if(currNode.getNext() == null){
+			return currNode;
+		}else{
+			Node<T> node = printReverseRecursive(currNode.getNext());
+			System.out.print(node+" --> ");
+			return currNode;
+		}
+	}
+	
 	
 	
 	/**
@@ -893,6 +921,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		sll.reverseList();
 		sll.printList();
+		sll.printReverse(sll.getList());
 		sll.reverseRecursively();
 		sll.printList();
 		System.out.println(sll.isCyclicList());
@@ -959,6 +988,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll4.printList();
 		SinglyLinkedList<Integer> sll5 = mergeSortedList(sll3, sll4);
 		sll5.printList();
+		sll5.printReverse(sll5.getList());
 		sll5.printList(sll5.sortedInsertion(sll5.getList(), new Node(6)));
 		
 		Node<Integer> head = mergeSortedListRecursively(sll3.getList(), sll4.getList());
@@ -978,6 +1008,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println(sll6.isPalindrom());
 		sll6.insertNode(new Node(3), 2);
 		sll6.printList();
+		sll6.printReverse(sll6.getList());
 		System.out.println(sll6.isPalindrom());
 		
 		System.out.println(sll4.getIntersectionOf2List(sll5, sll6));
