@@ -787,7 +787,24 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
-	
+	/**
+	 * This method removes duplicates from sorted linked list
+	 */
+	public void removeDuplicatedFromSortedList(Node<T> head){
+		System.out.println("Removing Duplicates from sorted linked list");
+		Node<T> currNode = head;
+		while(currNode != null){
+			if(currNode.getNext() == null) return;
+			else{
+				if(currNode.getItem().equals(currNode.getNext().getItem())){
+					currNode.setNext(currNode.getNext().getNext());
+				}else{
+					currNode = currNode.getNext();
+				}
+			}
+			
+		}
+	}
 	
 	/**
 	 * @param args
@@ -988,6 +1005,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll4.printList();
 		SinglyLinkedList<Integer> sll5 = mergeSortedList(sll3, sll4);
 		sll5.printList();
+		sll5.removeDuplicatedFromSortedList(sll5.getList());
+		sll5.printList();
+		
 		sll5.printReverse(sll5.getList());
 		sll5.printList(sll5.sortedInsertion(sll5.getList(), new Node(6)));
 		
@@ -1026,6 +1046,27 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		
 		System.out.println(sll4.getIntersectionOf2List(sll7, sll8));
+		
+		SinglyLinkedList<Integer> sll9 = new SinglyLinkedList<Integer>();
+		Node nodea1 = new Node(1);
+		Node nodea2 = new Node(2);
+		Node nodea3 = new Node(2);
+		Node nodea4 = new Node(3);
+		Node nodea5 = new Node(4);
+		Node nodea6 = new Node(4);
+		Node nodea7 = new Node(4);
+		sll9.insertNode(nodea1, 0);
+		sll9.insertNode(nodea2, 1);
+		sll9.insertNode(nodea3, 2);
+		sll9.insertNode(nodea4, 3);
+		sll9.insertNode(nodea5, 4);
+		sll9.insertNode(nodea6, 5);
+		sll9.insertNode(nodea7, 6);
+		
+		sll9.printList();
+		sll9.printReverse(sll9.getList());
+		sll9.removeDuplicatedFromSortedList(sll9.getList());
+		sll9.printList();
 	}
 
 
