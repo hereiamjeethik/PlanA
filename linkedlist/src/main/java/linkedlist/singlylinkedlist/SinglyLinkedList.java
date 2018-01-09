@@ -3,7 +3,9 @@
  */
 package linkedlist.singlylinkedlist;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author hereiamkarthik@gmail.com
@@ -651,6 +653,39 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return head;
 	}
 	
+	/**
+	 * This method checks whether the given list is palindrome or not
+	 * @return
+	 */
+	public boolean isPalindrom(){
+		System.out.println("Checking whether the list is palindrom or not");
+		Node<T>  oneStepPtr = head, twoStepPtr = head;
+		List<Integer> list = new ArrayList<Integer>();
+		if(head == null){
+			return true;
+		}else{
+			list.add((Integer)oneStepPtr.getItem());
+			while(twoStepPtr != null && twoStepPtr.getNext() != null){
+				oneStepPtr = oneStepPtr.getNext();
+				twoStepPtr = twoStepPtr.getNext().getNext();
+				list.add((Integer)oneStepPtr.getItem());
+			}
+			if(twoStepPtr == null){
+				list.remove(list.size()-1);
+			}
+			
+			for(int i=list.size()-1;i>=0;i--){
+				if(list.remove(i).equals(oneStepPtr.getItem())){
+					oneStepPtr = oneStepPtr.getNext();
+				}
+			}
+			if(oneStepPtr == null && list.isEmpty()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
 	
 	public void printList(){
 		Node<T> currNode = head;
@@ -837,6 +872,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.reverseRecursively();
 		sll.printList();
 		System.out.println(sll.isCyclicList());
+		System.out.println(sll.isPalindrom());
 		
 		sll.printList();
 		sll.deleteNodeUsingPosition(0); // deleting the head element
@@ -889,6 +925,20 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println("Merging sorted linked list recursively");
 		sll5.printList(head);
 		
+		System.out.println(sll5.isPalindrom());
+		
+		SinglyLinkedList<Integer> sll6 = new SinglyLinkedList<Integer>();
+		sll6.insertNode(new Node(1), 0);
+		sll6.insertNode(new Node(2), 1);
+		sll6.insertNode(new Node(1), 2);
+		sll6.printList();
+		System.out.println(sll6.isPalindrom());
+		sll6.insertNode(new Node(2), 1);
+		sll6.printList();
+		System.out.println(sll6.isPalindrom());
+		sll6.insertNode(new Node(3), 2);
+		sll6.printList();
+		System.out.println(sll6.isPalindrom());
 	}
 
 
