@@ -13,6 +13,7 @@ import java.util.List;
  * TODO 2: Do the Thread-Safe code.
  * TODO 3: write unit test cases for all the functions and cases.
  * TODO 4: There is a bug in the code, which needs to be fixed
+ * TODO : Recursively finding whether the list is palindrome or not
  *
  */
 public class SinglyLinkedList<T> implements Iterable<T> {
@@ -687,6 +688,45 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * This method returns Node where the 2 linked list intersect
+	 * @param sll1
+	 * @param sll2
+	 * @return
+	 */
+	public Node<T> getIntersectionOf2List(SinglyLinkedList<T> sll1, SinglyLinkedList<T> sll2){
+		int len1 = sll1.getLengthIteratively();
+		int len2 = sll2.getLengthIteratively();
+		Node<T> curr1 = sll1.getList();
+		Node<T> curr2 = sll2.getList();
+		if(len1 > len2){
+			int diff = len1-len2;
+			int i=0;
+			while(i<diff){
+				curr1 = curr1.getNext();
+				i++;
+			}
+		}else if(len1 < len2){
+			int diff = len2-len1;
+			int i=0;
+			while(i<diff){
+				curr2 = curr2.getNext();
+				i++;
+			}
+		}
+		
+		while(curr1 != null && curr2 != null){
+			if(curr1 == curr2){
+				return curr1;
+			}else{
+				curr1 = curr1.getNext();
+				curr2 = curr2.getNext();
+			}
+		}
+		System.out.println("There is no intersection points");
+		return null;
+	}
+	
 	public void printList(){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -939,6 +979,22 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll6.insertNode(new Node(3), 2);
 		sll6.printList();
 		System.out.println(sll6.isPalindrom());
+		
+		System.out.println(sll4.getIntersectionOf2List(sll5, sll6));
+		SinglyLinkedList<Integer> sll7 = new SinglyLinkedList<Integer>();
+		Node nodep = new Node(1);
+		Node nodeq = new Node(2);
+		Node noder = new Node(3);
+		sll7.insertNode(nodep,0);
+		sll7.insertNode(nodeq, 1);
+		sll7.insertNode(noder, 2);
+		
+		SinglyLinkedList<Integer> sll8 = new SinglyLinkedList<Integer>();
+		Node nodem = new Node(0);
+		sll8.insertNode(nodeq, 0);
+		
+		
+		System.out.println(sll4.getIntersectionOf2List(sll7, sll8));
 	}
 
 
