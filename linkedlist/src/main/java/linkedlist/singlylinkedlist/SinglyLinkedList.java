@@ -955,6 +955,21 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This nodes deletes the alternate node recursively
+	 * @param currNode
+	 */
+	public Node<T> deleteAlternateNodeRecursively(Node<T> currNode){
+		if(currNode == null){
+			return null;
+		}else if(currNode.getNext() == null){
+			return currNode;
+		}else{
+			currNode.setNext(deleteAlternateNodeRecursively(currNode.getNext().getNext()));
+			return currNode;
+		}
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1247,6 +1262,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla1.insertNode(new Node(3), 1);
 		slla1.insertNode(new Node(4), 2);
 		slla1.insertNode(new Node(5), 3);
+		slla1.insertNode(new Node(9), 4);
 		
 		SinglyLinkedList<Integer> slla2 = new SinglyLinkedList<Integer>();
 		slla2.insertNode(new Node(3), 0);
@@ -1257,6 +1273,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla1.printList();
 		slla1.deleteAlternateNode();
 		slla1.printList();
+		System.out.println("Deleting alternative node recursively");
+		slla1.printList(slla1.deleteAlternateNodeRecursively(slla1.getList()));
+		
+		
 		
 
 	}
