@@ -4,8 +4,10 @@
 package linkedlist.singlylinkedlist;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hereiamkarthik@gmail.com
@@ -807,6 +809,26 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This method removes the duplicates from unsorted linked list
+	 * @param head
+	 */
+	public void removeDuplicateFromUnsortedList(Node<Integer> head){
+		System.out.println("Removing the Duplicates from unsorted linked list");
+		Node<Integer> currNode = head, prevNode = null;
+		Map<Integer, Boolean> mapData = new HashMap<Integer, Boolean>();
+		while(currNode != null){
+			if(mapData.get(currNode.getItem()) == null){
+				mapData.put(currNode.getItem(), true);
+				prevNode = currNode;
+				currNode = currNode.getNext();
+			}else{
+				prevNode.setNext(currNode.getNext());
+				currNode = currNode.getNext();
+			}
+		}
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1065,8 +1087,19 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		sll9.printList();
 		sll9.printReverse(sll9.getList());
+		SinglyLinkedList sll10 = sll9;
 		sll9.removeDuplicatedFromSortedList(sll9.getList());
 		sll9.printList();
+		
+		System.out.println("Code to delete the duplicate from unsorted list");
+		sll10.insertNode(new Node(0), 3);
+		sll10.insertNode(new Node(0), 1);
+		sll10.insertNode(new Node(0), 5);
+		sll10.insertNode(new Node(1), 4);
+		sll10.printList();
+		sll10.removeDuplicateFromUnsortedList(sll10.getList());
+		sll10.printList();
+
 	}
 
 
