@@ -909,7 +909,37 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 			 currNode.setNext(head);
 			 this.head = currNode;
 		}
-		
+	}
+	
+	/**
+	 * Intersection of two sorted linked list
+	 * @param head1
+	 * @param head2
+	 * @return
+	 */
+	public Node<Integer> intersectionOfList(Node<Integer> head1, Node<Integer> head2){
+		System.out.println("Intersection of 2 sorted linked list");
+		Node<Integer> curr1 = head1;
+		Node<Integer> curr2 = head2;
+		Node<Integer> newCurr = null, newHead = null;
+		while(curr1 != null && curr2 != null){
+			if(curr1.getItem().equals(curr2.getItem())){
+				if(newCurr != null){
+					newCurr.setNext(new Node(curr1.getItem()));
+					newCurr = newCurr.getNext();
+				}else{
+					newCurr = new Node(curr1.getItem());
+					newHead = newCurr;
+				}
+				curr1=curr1.getNext();
+				curr2=curr2.getNext();
+			}else if(curr1.getItem() < curr2.getItem()){
+				curr1=curr1.getNext();
+			}else{
+				curr2=curr2.getNext();
+			}
+		}
+		return newHead;
 	}
 	
 	/**
@@ -1195,8 +1225,24 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll10.printList();
 		sll10.pairwiseSwappingRecursively(sll10.getList());
 		sll10.printList();
+		
+		
 		sll10.moveLastNodeToFirst(sll10.getList());
 		sll10.printList();
+		
+		SinglyLinkedList<Integer> slla1 = new SinglyLinkedList<Integer>();
+		slla1.insertNode(new Node(1), 0);
+		slla1.insertNode(new Node(3), 1);
+		slla1.insertNode(new Node(4), 2);
+		slla1.insertNode(new Node(5), 3);
+		
+		SinglyLinkedList<Integer> slla2 = new SinglyLinkedList<Integer>();
+		slla2.insertNode(new Node(3), 0);
+		slla2.insertNode(new Node(5), 1);
+		slla2.insertNode(new Node(7), 2);
+		
+		slla1.printList(slla1.intersectionOfList(slla1.getList(), slla2.getList()));
+		
 
 	}
 
