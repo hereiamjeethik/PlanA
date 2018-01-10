@@ -943,6 +943,18 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This method deleted the alternate note in the linked list
+	 */
+	public void deleteAlternateNode(){
+		System.out.println("Deleting alternate nodes in linked list");
+		Node<T> currNode = head;
+		while(currNode != null && currNode.getNext() != null){
+			currNode.setNext(currNode.getNext().getNext());
+			currNode = currNode.getNext();
+		}
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1242,6 +1254,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla2.insertNode(new Node(7), 2);
 		
 		slla1.printList(slla1.intersectionOfList(slla1.getList(), slla2.getList()));
+		slla1.printList();
+		slla1.deleteAlternateNode();
+		slla1.printList();
 		
 
 	}
