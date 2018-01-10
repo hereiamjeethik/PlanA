@@ -860,6 +860,34 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This method will recursively swap the elements pairwise
+	 * @param head
+	 */
+	public void pairwiseSwappingRecursively(Node<T> head){
+		System.out.println("Recursively swapping the list pairwise");
+		if(head != null && head.getNext() != null){
+			this.head = pairwiseSwappingRecursively(head, head.getNext());
+		}
+	}
+	
+	private Node<T> pairwiseSwappingRecursively(Node<T> currNode, Node<T> nextNode){
+		if(currNode == null || nextNode == null ){
+			return currNode;
+		}else{
+			if(nextNode.getNext() != null){
+				Node<T> node = pairwiseSwappingRecursively(nextNode.getNext(), nextNode.getNext().getNext());
+				nextNode.setNext(currNode);
+				currNode.setNext(node);
+				return nextNode;
+			}else{
+				nextNode.setNext(currNode);
+				currNode.setNext(null);
+				return nextNode;
+			}
+		}
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1130,6 +1158,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll10.printList();
 		sll10.pairwiseSwapping(sll10.getList());
 		sll10.printList();
+		sll10.pairwiseSwappingRecursively(sll10.getList());
+		sll10.printList();
 		sll10.removeDuplicateFromUnsortedList(sll10.getList());
 		sll10.printList();
 		
@@ -1137,6 +1167,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println("Swapping the nodes pairwise");
 		sll10.printList();
 		sll10.pairwiseSwapping(sll10.getList());
+		sll10.printList();
+		sll10.pairwiseSwappingRecursively(sll10.getList());
 		sll10.printList();
 
 	}
