@@ -870,6 +870,12 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * This method is the utility for recursion
+	 * @param currNode
+	 * @param nextNode
+	 * @return
+	 */
 	private Node<T> pairwiseSwappingRecursively(Node<T> currNode, Node<T> nextNode){
 		if(currNode == null || nextNode == null ){
 			return currNode;
@@ -885,6 +891,25 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 				return nextNode;
 			}
 		}
+	}
+	
+	/**
+	 * This method removes the last element and move it to front
+	 * @param head
+	 */
+	public void moveLastNodeToFirst(Node<T> head){
+		System.out.println("Moving the Last element to the front");
+		Node<T> currNode=head, prevNode = null;
+		if(currNode != null){
+			while(currNode.getNext() != null){
+				prevNode = currNode;
+				currNode = currNode.getNext();
+			}
+			 prevNode.setNext(null);
+			 currNode.setNext(head);
+			 this.head = currNode;
+		}
+		
 	}
 	
 	/**
@@ -1169,6 +1194,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll10.pairwiseSwapping(sll10.getList());
 		sll10.printList();
 		sll10.pairwiseSwappingRecursively(sll10.getList());
+		sll10.printList();
+		sll10.moveLastNodeToFirst(sll10.getList());
 		sll10.printList();
 
 	}
