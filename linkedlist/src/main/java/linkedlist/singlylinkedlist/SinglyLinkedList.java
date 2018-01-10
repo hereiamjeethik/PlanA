@@ -829,6 +829,37 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This method will swap the list pairwise
+	 * @param head
+	 */
+	public void pairwiseSwapping(Node<T> head){
+		System.out.println("Pairwise swapping the list");
+		Node<T> currNode = head, prevNode = null, nextNode = null, temp = null;
+		while(currNode != null){
+			nextNode = currNode.getNext();
+			if(nextNode != null){
+				temp = nextNode.getNext();
+			}else{
+				return;
+			}
+			
+			if(prevNode == null){
+				this.head = nextNode;
+				nextNode.setNext(currNode);
+				currNode.setNext(temp);
+				prevNode = currNode;
+				currNode = temp;
+			}else{
+				prevNode.setNext(nextNode);
+				nextNode.setNext(currNode);
+				currNode.setNext(temp);
+				prevNode = currNode;
+				currNode = temp;
+			}
+		}
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1097,7 +1128,15 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll10.insertNode(new Node(0), 5);
 		sll10.insertNode(new Node(1), 4);
 		sll10.printList();
+		sll10.pairwiseSwapping(sll10.getList());
+		sll10.printList();
 		sll10.removeDuplicateFromUnsortedList(sll10.getList());
+		sll10.printList();
+		
+		
+		System.out.println("Swapping the nodes pairwise");
+		sll10.printList();
+		sll10.pairwiseSwapping(sll10.getList());
 		sll10.printList();
 
 	}
