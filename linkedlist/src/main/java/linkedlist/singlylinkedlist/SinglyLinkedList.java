@@ -246,11 +246,11 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 					prevNode.setNext(currNode.getNext());
 				}
 			}else{
-				throw new RuntimeException("Position is greater than the length of the list");
+				System.out.println("Position is greater than the length of the list");
 			}
 			
 		}else{
-			throw new RuntimeException("Position is greater than the length of the list");
+			System.out.println("Position is greater than the length of the list");
 		}
 	}
 	
@@ -458,6 +458,30 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This method returns the middle of the given list
+	 * 
+	 * @param firstMiddle, it is true, if you want the first node of the middle. in case of even numbered list
+	 * @return
+	 */
+	public static Node getMiddleNodeFromList(Node head, boolean firstMiddle){
+		
+		Node oneStepPtr = head, twoStepPtr = head;
+		while(twoStepPtr != null && twoStepPtr.getNext() != null){
+			twoStepPtr = twoStepPtr.getNext().getNext();
+			if(firstMiddle && twoStepPtr == null){
+				System.out.println("First Middle Element of the list is "+oneStepPtr);
+				return oneStepPtr;
+			}else if(firstMiddle){
+				oneStepPtr = oneStepPtr.getNext();
+			}else{
+				oneStepPtr = oneStepPtr.getNext();
+			}
+		}
+		System.out.println("Middle Element of the list is "+oneStepPtr);
+		return oneStepPtr;
+	}
+	
+	/**
 	 * 
 	 * @param position, the position of element from end
 	 * @return the Node at position from the end
@@ -605,6 +629,69 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 		
 		return mergedList;
+	}
+	
+	/**
+	 * TODO: need to understand why generic is not working here
+	 * @param list1
+	 * @param list2
+	 * @return
+	 */
+	public static Node mergeSortedList (Node list1, Node list2){
+		System.out.println("Merging the Sorted linked list iteratively");
+			Node<Integer> newHead = null, newCurr = null;
+			Node<Integer> curr1 = list1;
+			Node<Integer> curr2 = list2;
+			while(curr1 != null && curr2 != null){
+				if(curr1.getItem() > curr2.getItem()){
+					if(newHead == null){
+						newHead = new Node<Integer>(curr2.getItem());
+						newCurr = newHead;
+					}else{
+						newCurr.setNext(new Node<Integer>(curr2.getItem()));
+						newCurr = newCurr.getNext();
+					}
+					
+					curr2 = curr2.getNext();
+				}else{
+					if(newHead == null){
+						newHead = new Node<Integer>(curr1.getItem());
+						newCurr = newHead;
+					}else{
+						newCurr.setNext(new Node<Integer>(curr1.getItem()));
+						newCurr = newCurr.getNext();
+					}
+					curr1= curr1.getNext();
+				}
+			}
+			
+			if(curr1 == null){
+				while(curr2 != null){
+					if(newHead == null){
+						newHead = new Node<Integer>(curr2.getItem());
+						newCurr = newHead;
+					}else{
+						newCurr.setNext(new Node<Integer>(curr2.getItem()));
+						newCurr = newCurr.getNext();
+					}
+					
+					curr2 = curr2.getNext();
+				}
+			}else{
+				while(curr1 != null){
+					if(newHead == null){
+						newHead = new Node<Integer>(curr1.getItem());
+						newCurr = newHead;
+					}else{
+						newCurr.setNext(new Node<Integer>(curr1.getItem()));
+						newCurr = newCurr.getNext();
+					}
+					curr1 = curr1.getNext();
+				}
+			}
+		
+		
+		return newHead;
 	}
 	
 	/**
@@ -1047,6 +1134,26 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This is merge sorting for a linked list
+	 * @param currNode
+	 * @return
+	 */
+	public Node mergeSort(Node currNode){
+		if(getMiddleNodeFromList(currNode, true) == currNode && currNode.getNext() == null){
+			return currNode;
+		}else{
+			Node middleNode = getMiddleNodeFromList(currNode, true);
+			Node secondList = middleNode.getNext();
+			middleNode.setNext(null);
+			Node left = mergeSort(currNode);
+			Node right = mergeSort(secondList);
+			Node mergedList = mergeSortedList(left, right);
+			return mergedList;
+		}
+	}
+	
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1098,9 +1205,16 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.swap(3, 2);  //   swapping non adjacent nodes
 		sll.printList();
 		
-		System.out.println(sll.getMiddleNodeFromList(true));
-		System.out.println(sll.getMiddleNodeFromList(false));
 		
+		
+		System.out.println(sll.getMiddleNodeFromList(true));
+		System.out.println(getMiddleNodeFromList(sll.getList(), true));
+		System.out.println(sll.getMiddleNodeFromList(false));
+		System.out.println(getMiddleNodeFromList(sll.getList(), false));
+		
+		sll.printList();
+		System.out.println("Mergesort for linked list");
+		sll.printList(sll.mergeSort(sll.getList()));
 		
 		Node<Integer> node6 = new Node<Integer>(3);
 		sll.insertNode(node6, 0);
@@ -1133,11 +1247,11 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		sll.deleteDuplicateNodeUsingKey(3, false, true, false, false, false); // deleting the first duplicated element
 		sll.printList();
-		sll.insertNode(node6, 0);
+		sll.insertNode(new Node(3), 0);
 		sll.printList();
 		sll.deleteDuplicateNodeUsingKey(3, false, false, true, false, false); // deleting the last duplicated element
 		sll.printList();
-		sll.insertNode(node7, 9);
+		sll.insertNode(new Node(3), 9);
 		sll.printList();
 		sll.deleteDuplicateNodeUsingKey(3, false, false, false, false, true); // deleting odd duplicated elements
 		sll.printList();
@@ -1173,6 +1287,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		sll.deleteNodeUsingPosition(1);  // deleting the middle element
 		sll.printList();
+		sll.insertNode(new Node(2), 1);
 		sll.swap(4, 2);
 		sll.printList();
 		
