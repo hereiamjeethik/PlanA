@@ -970,6 +970,37 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This prints the 2 split of list in alternative way
+	 * @param head
+	 */
+	public void printAlternativeNode(Node<T> head){
+		System.out.println("Printing the Nodes alternatively");
+		Node<T> currNode = head;
+		if(currNode != null){
+			printAlternativeNodeInList(currNode);
+			System.out.println("");
+			if(currNode.getNext() != null){
+				printAlternativeNodeInList(currNode.getNext());
+			}
+		}
+		System.out.println("");
+	}
+	
+	/**
+	 * This method is the utility for printing alternative nodes in the list
+	 * @param head
+	 */
+	private void printAlternativeNodeInList(Node<T> head){
+		Node<T> currNode = head;
+		if(currNode != null){
+			System.out.print(currNode.getItem()+" --> ");
+			if(currNode.getNext() != null){
+				printAlternativeNodeInList(currNode.getNext().getNext());
+			}
+		}
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1271,7 +1302,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		slla1.printList(slla1.intersectionOfList(slla1.getList(), slla2.getList()));
 		slla1.printList();
+		slla1.printAlternativeNode(slla1.getList());
+		slla1.printList();
 		slla1.deleteAlternateNode();
+		slla1.printAlternativeNode(slla1.getList());
 		slla1.printList();
 		System.out.println("Deleting alternative node recursively");
 		slla1.printList(slla1.deleteAlternateNodeRecursively(slla1.getList()));

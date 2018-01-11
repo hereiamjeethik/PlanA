@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>Dynamic Form</title>
+		<script type="text/javascript" src="DynamicForm.js"></script>
+	</head>
+	<body>
+		<form>
+			<select id="mySelection" onChange="addElement(this)">
+				<option value="dummy">Select one below</option>
+				<option value="name">Name</option>
+				<option value="age">age</option>
+			</select>
+			<div id="dynamicDiv"></div>	
+		</form>
+	</body>
+</html>
+
