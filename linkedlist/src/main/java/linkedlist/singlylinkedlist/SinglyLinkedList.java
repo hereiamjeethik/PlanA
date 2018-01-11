@@ -1001,6 +1001,52 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * This method checks whether both the list is identical or not
+	 * @param head1
+	 * @param head2
+	 * @return
+	 */
+	public boolean isIdenticalIteratively(Node<T> head1, Node<T> head2){
+		System.out.println("Check whether the list is identical or not");
+		Node<T> curr1 = head1; Node<T> curr2 = head2;
+		while(curr1 != null && curr2 != null){
+			if(curr1.getItem().equals(curr2.getItem())){
+				curr1 = curr1.getNext();
+				curr2 = curr2.getNext();
+			}else{
+				return false;
+			}
+		}
+		if(curr1 != null || curr2 != null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	/**
+	 * This method checks whether the list is identical or not
+	 * @param head1
+	 * @param head2
+	 * @return
+	 */
+	public boolean isIdenticalRecusrsively(Node<T> head1, Node<T> head2){
+		if(head1 == null && head2 == null){
+			return true;
+		}else{
+			if(head1 == null || head2 == null){
+				return false;
+			}else{
+				if(head1.getItem().equals(head2.getItem())){
+					return isIdenticalRecusrsively(head1.getNext(), head2.getNext());
+				}else{
+					return false;
+				}
+			}
+		}
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1300,15 +1346,24 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla2.insertNode(new Node(5), 1);
 		slla2.insertNode(new Node(7), 2);
 		
+		System.out.println(slla1.isIdenticalIteratively(slla1.getList(), slla2.getList()));
+		System.out.println(slla1.isIdenticalRecusrsively(slla2.getList(), slla1.getList()));
+		
 		slla1.printList(slla1.intersectionOfList(slla1.getList(), slla2.getList()));
 		slla1.printList();
 		slla1.printAlternativeNode(slla1.getList());
 		slla1.printList();
 		slla1.deleteAlternateNode();
+		System.out.println(slla1.isIdenticalIteratively(slla1.getList(), slla1.getList()));
+		System.out.println(slla1.isIdenticalRecusrsively(slla1.getList(), slla1.getList()));
 		slla1.printAlternativeNode(slla1.getList());
 		slla1.printList();
 		System.out.println("Deleting alternative node recursively");
 		slla1.printList(slla1.deleteAlternateNodeRecursively(slla1.getList()));
+		
+		System.out.println("Identical Check");
+		System.out.println(slla1.isIdenticalIteratively(null, null));
+		System.out.println(slla1.isIdenticalRecusrsively(null, null));
 		
 		
 		
