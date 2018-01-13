@@ -29,6 +29,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return head;
 	}
 	
+	public void setList(Node<T> head){
+		this.head=head;
+	}
+	
 	/**
 	 * @param newNode, position
 	 * newNode is the node to be inserted in the specified position
@@ -374,6 +378,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 			}
 			prevNode = currNode;
 			currNode = currNode.getNext();
+		}
+		if(secondPrevNode == null){
+			System.out.println("Either of the node is not in the list");
+			return;
 		}
 		if(firstPrevNode != null){   // first node is not the head
 			if(secondPrevNode.equals(firstPrevNode.getNext())){
@@ -1152,6 +1160,54 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * This method reverses the linked list in given length
+	 * @param head
+	 * @return
+	 */
+	public Node reverseInGroup(Node head, int length){
+		System.out.println("Reversing in group");
+		Node curr = head; int counter = 0;
+		Node prev = null, secPrev = null, next = null, secStart = null;
+		if(curr!=null){
+			next = curr.getNext();
+		}else{
+			return curr;
+		}
+		
+		while(curr != null && counter < length){
+			if(prev == null || counter == 0){
+				curr.setNext(prev);
+				secStart = curr;
+			}else{
+				curr.setNext(prev);
+			}
+			prev = curr;
+			curr=next;
+			if(next != null){
+				next=next.getNext();
+			}
+			counter++;
+			if(counter == length ){
+				counter = 0;
+				if(secPrev == null){
+					head = prev;
+					secPrev = secStart;
+				}else{
+					secPrev.setNext(prev);
+					
+				}
+				prev=null;
+				
+			}
+		}
+		if(counter != length){
+			secPrev.setNext(prev);
+		}
+		
+		return head;
+	}
+	
 	
 	/**
 	 * @param args
@@ -1186,6 +1242,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.insertNode(node5, 10); // insert into tail and the position is high
 		sll.printList();
 		
+		sll.setList(sll.reverseInGroup(sll.getList(), 3));
+		sll.printList();
+		sll.setList(sll.reverseInGroup(sll.getList(), 5));
+		sll.printList();
 		
 		System.out.println(sll.getNthNodeFromEnd(0));
 		System.out.println(sll.getNthNodeFromEnd(4));
