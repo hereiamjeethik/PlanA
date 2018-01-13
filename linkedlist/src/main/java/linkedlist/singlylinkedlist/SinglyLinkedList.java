@@ -1251,6 +1251,90 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * This method reverses the node group-wise alternatively
+	 */
+	public void reverseInGroupAlternatively(int groupBy){
+		System.out.println("Reverse in group "+groupBy);
+		Node curr = head, prev= null, next=null,secPrev= null,secStart= curr; 
+		int count = 0;
+		boolean reverse = true;
+		while(curr != null && count < groupBy){
+			if(reverse){
+				next = curr.getNext();
+				curr.setNext(prev);
+				prev= curr;
+				curr = next;
+			}else{
+				secPrev = curr;
+				prev = curr;
+				curr = curr.getNext();
+				secStart = curr; 
+			}
+			
+			count++;
+			if(count == groupBy){
+				if(secPrev == null){
+					head = prev;
+					secPrev = secStart;
+					secPrev.setNext(curr);
+					secStart = curr;
+					prev = null;
+				}else{
+					secPrev.setNext(prev);
+					secPrev = secStart;
+					secStart = curr;
+					prev = null;
+				}
+				if(reverse){
+					reverse = false;
+				}else{
+					reverse = true;
+				}
+				if(curr == null){
+					break;
+				}else{
+					
+				}
+				
+			}
+			
+		}
+		if(count != groupBy){
+			if(reverse){
+				secPrev.setNext(prev);
+			}
+			
+		}
+	}
+	
+	public void deleteGreaterRight(){
+		System.out.println("Delete the node greater than the right");
+		Node<Integer> value = deleteGreaterRight((Node<Integer>)this.head);
+		this.printList((Node<T>)value);
+	}
+	
+	
+	/**
+	 * This method deletes node which have a grate value on right side
+	 * @param curr
+	 * @return
+	 */
+	private Node<Integer> deleteGreaterRight(Node<Integer> curr){
+		if(curr.getNext() == null){
+			return curr;
+		}else{
+			Node<Integer> temp = deleteGreaterRight(curr.getNext());
+			if(curr.getItem() < temp.getItem()){
+				return temp;
+			}else{
+				curr.setNext(temp);
+				return curr;
+			}
+		}
+		
+	}
+	
 	
 	/**
 	 * @param args
@@ -1607,6 +1691,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla1.printList();
 		slla1.reverseInGroup2(6);
 		slla1.printList();
+		slla1.reverseInGroupAlternatively(2);
+		slla1.printList();
+		
 		
 		
 		System.out.println("Deleting alternative node recursively");
@@ -1615,6 +1702,19 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println("Identical Check");
 		System.out.println(slla1.isIdenticalIteratively(null, null));
 		System.out.println(slla1.isIdenticalRecusrsively(null, null));
+		
+		SinglyLinkedList<Integer> slla3 = new SinglyLinkedList<Integer>();
+		slla3.insertNode(new Node(12), 0);
+		slla3.insertNode(new Node(15), 1);
+		slla3.insertNode(new Node(10), 2);
+		slla3.insertNode(new Node(11), 3);
+		slla3.insertNode(new Node(5), 4);
+		slla3.insertNode(new Node(6), 5);
+		slla3.insertNode(new Node(2), 6);
+		slla3.insertNode(new Node(3), 7);
+		slla3.insertNode(new Node(13), 3);
+		slla3.printList();
+		slla3.deleteGreaterRight();
 		
 		
 		
