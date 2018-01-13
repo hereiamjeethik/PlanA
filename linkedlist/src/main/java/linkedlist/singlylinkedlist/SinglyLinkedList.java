@@ -1160,6 +1160,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
+	/**
+	 * this is to reverse the list in group-wise
+	 * @param groupBy
+	 */
 	public void reverseInGroup(int groupBy){
 		Node<T> curr = head, prev = null, secPrev =null, secStart = curr, next = null;
 		int count = 0;
@@ -1209,6 +1213,41 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 
 				}
 			}
+		}
+	}
+	
+	/**
+	 * This method reverses the node group-wise
+	 */
+	public void reverseInGroup2(int groupBy){
+		System.out.println("Reverse in group "+groupBy);
+		Node curr = head, prev= null, next=null,secPrev= null,secStart= curr;
+		int count = 0;
+		while(curr != null && count <groupBy){
+			next = curr.getNext();
+			curr.setNext(prev);
+			prev= curr;
+			curr = next;
+			count++;
+			if(count == groupBy){
+				if(secPrev == null){
+					head = prev;
+					secPrev = secStart;
+					secPrev.setNext(curr);
+					secStart = curr;
+					prev = null;
+				}else{
+					secPrev.setNext(prev);
+					secPrev = secStart;
+					secStart = curr;
+					prev = null;
+				}
+				count=0;
+			}
+			
+		}
+		if(count != groupBy){
+			secPrev.setNext(prev);
 		}
 	}
 	
@@ -1548,6 +1587,27 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		System.out.println("Reversing in group");
 		slla1.reverseInGroup(3);
 		slla1.printList();
+		slla1.reverseInGroup2(2);
+		slla1.printList();
+		slla1.reverseInGroup2(3);
+		slla1.printList();
+		slla1.insertNode(new Node(2), 3);
+		slla1.insertNode(new Node(3), 4);
+		slla1.insertNode(new Node(5), 5);
+		slla1.insertNode(new Node(6), 6);
+		slla1.insertNode(new Node(7), 7);
+		slla1.printList();
+		slla1.reverseInGroup2(2);
+		slla1.printList();
+		slla1.reverseInGroup2(3);
+		slla1.printList();
+		slla1.reverseInGroup2(4);
+		slla1.printList();
+		slla1.reverseInGroup2(5);
+		slla1.printList();
+		slla1.reverseInGroup2(6);
+		slla1.printList();
+		
 		
 		System.out.println("Deleting alternative node recursively");
 		slla1.printList(slla1.deleteAlternateNodeRecursively(slla1.getList()));
