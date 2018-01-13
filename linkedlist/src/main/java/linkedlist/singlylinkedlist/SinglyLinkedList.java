@@ -1160,52 +1160,56 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
-	/**
-	 * This method reverses the linked list in given length
-	 * @param head
-	 * @return
-	 */
-	public Node reverseInGroup(Node head, int length){
-		System.out.println("Reversing in group");
-		Node curr = head; int counter = 0;
-		Node prev = null, secPrev = null, next = null, secStart = null;
-		if(curr!=null){
+	public void reverseInGroup(int groupBy){
+		Node<T> curr = head, prev = null, secPrev =null, secStart = curr, next = null;
+		int count = 0;
+		if(curr != null){
 			next = curr.getNext();
 		}else{
-			return curr;
+			return;
 		}
 		
-		while(curr != null && counter < length){
-			if(prev == null || counter == 0){
-				curr.setNext(prev);
-				secStart = curr;
-			}else{
-				curr.setNext(prev);
-			}
+		while(curr != null && count < groupBy){
+			curr.setNext(prev);
 			prev = curr;
-			curr=next;
-			if(next != null){
+			curr = next;
+			if(curr != null){
 				next=next.getNext();
+			}else{
+				if(secStart == prev){
+					break;
+				}else{
+					if(secPrev == null){
+						head = prev;
+						break;
+					}else{
+						secPrev.setNext(prev);
+						break;
+					}
+				}
 			}
-			counter++;
-			if(counter == length ){
-				counter = 0;
+			
+			count++;
+			if(count == groupBy){
+				count = 0;
 				if(secPrev == null){
 					head = prev;
 					secPrev = secStart;
+					secStart.setNext(curr);
+					secStart = curr;
+					prev= null;
+				//	curr= next;
 				}else{
-					secPrev.setNext(prev);
-					
+					secPrev.setNext(curr);
+					secStart.setNext(next);
+					secPrev= secStart;
+					secStart = null;
+					prev= null;
+				//	curr= next;
+
 				}
-				prev=null;
-				
 			}
 		}
-		if(counter != length){
-			secPrev.setNext(prev);
-		}
-		
-		return head;
 	}
 	
 	
@@ -1242,14 +1246,12 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.insertNode(node5, 10); // insert into tail and the position is high
 		sll.printList();
 		
-		sll.setList(sll.reverseInGroup(sll.getList(), 3));
-		sll.printList();
-		sll.setList(sll.reverseInGroup(sll.getList(), 5));
-		sll.printList();
 		
 		System.out.println(sll.getNthNodeFromEnd(0));
 		System.out.println(sll.getNthNodeFromEnd(4));
-		
+		System.out.println("Reversing in group");
+		sll.reverseInGroup(3);
+		sll.printList();
 		sll.deleteNodeUsingKey(5); // delete the tail element
 		
 		
@@ -1420,6 +1422,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll4.printList();
 		SinglyLinkedList<Integer> sll5 = mergeSortedList(sll3, sll4);
 		sll5.printList();
+		sll5.setList(sll5.mergeSort(sll5.getList()));
+		sll5.printList();
 		sll5.removeDuplicatedFromSortedList(sll5.getList());
 		sll5.printList();
 		
@@ -1529,10 +1533,22 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla1.printAlternativeNode(slla1.getList());
 		slla1.printList();
 		slla1.deleteAlternateNode();
+		System.out.println("Reversing in group");
+		slla1.reverseInGroup(3);
+		slla1.printList();
+		slla1.reverseInGroup(2);
+		slla1.printList();
+		slla1.reverseInGroup(4);
+		slla1.printList();
+		
 		System.out.println(slla1.isIdenticalIteratively(slla1.getList(), slla1.getList()));
 		System.out.println(slla1.isIdenticalRecusrsively(slla1.getList(), slla1.getList()));
 		slla1.printAlternativeNode(slla1.getList());
 		slla1.printList();
+		System.out.println("Reversing in group");
+		slla1.reverseInGroup(3);
+		slla1.printList();
+		
 		System.out.println("Deleting alternative node recursively");
 		slla1.printList(slla1.deleteAlternateNodeRecursively(slla1.getList()));
 		
