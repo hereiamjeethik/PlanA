@@ -1335,6 +1335,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 	}
 	
+	/**
+	 * This method will find loops in the list and remove the loops
+	 */
 	public void deleteAndRemoveLoop(){
 		System.out.println("Deleting and Removing the loop from the list");
 		Node firstPtr = head, secondPtr = head, loopPtr = head, prevNode = null;
@@ -1358,7 +1361,15 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 	}
 	
-	
+	/**
+	 * This method returns the sum of 2 numbered list
+	 * Example: 345 is represented as 5 --> 4 --> 3
+	 * 42 is represented as 2 --> 4
+	 * total sum is: 387 as 7 --> 8 --> 3
+	 * @param operand1
+	 * @param operand2
+	 * @return
+	 */
 	public Node addNumberList(Node<Integer> operand1, Node<Integer> operand2){
 		SinglyLinkedList<Integer> sumList = new SinglyLinkedList<Integer>();
 		Node<Integer> curr1 = operand1, curr2=operand2; int sum = 0, carry = 0, count =0;
@@ -1393,6 +1404,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		}
 		return sumList.getList();
 	}
+	
+	
 	
 	/**
 	 * @param args
