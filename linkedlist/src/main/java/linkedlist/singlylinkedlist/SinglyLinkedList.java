@@ -1405,6 +1405,27 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return sumList.getList();
 	}
 	
+	/**
+	 * This method will rotate the list anti-clockwise
+	 */
+	public void rotateListAnticlockwise(int k){
+		Node curr = head, prev = null; int count = 0;
+		while(count < k){
+			prev = curr;
+			curr = curr.getNext(); // assumption k is never greater than the number of nodes
+			count++;
+		}
+		Node tempHead = curr;
+		prev.setNext(null);
+		while(curr != null){
+			prev= curr;
+			curr = curr.getNext();
+		}
+		prev.setNext(head);
+		head = tempHead;
+		
+	}
+	
 	
 	
 	/**
@@ -1787,6 +1808,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla3.insertNode(new Node(3), 7);
 		slla3.insertNode(new Node(13), 3);
 		slla3.printList();
+		slla3.rotateListAnticlockwise(2);
+		slla3.printList();
+		slla3.rotateListAnticlockwise(3);
+		slla3.printList();
 		slla3.deleteGreaterRight();
 		
 		SinglyLinkedList<Integer> slla4 = new SinglyLinkedList<Integer>();
@@ -1800,6 +1825,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla5.printList();
 		System.out.println("Adding 2 numbers");
 		slla5.printList(slla5.addNumberList(slla4.getList(), slla5.getList()));
+		slla5.printList();
+		
 		
 	}
 
