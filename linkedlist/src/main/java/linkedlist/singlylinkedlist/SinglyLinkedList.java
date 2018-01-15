@@ -1335,6 +1335,64 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 	}
 	
+	public void deleteAndRemoveLoop(){
+		System.out.println("Deleting and Removing the loop from the list");
+		Node firstPtr = head, secondPtr = head, loopPtr = head, prevNode = null;
+		while(secondPtr != null && secondPtr.getNext() != null){
+			prevNode = firstPtr;
+			firstPtr = firstPtr.getNext();
+			secondPtr = secondPtr.getNext().getNext();
+			if(firstPtr == secondPtr){
+				System.out.println("The list contains a loop");
+				while(loopPtr != firstPtr){
+					prevNode = firstPtr;
+					firstPtr = firstPtr.getNext();
+					loopPtr = loopPtr.getNext();
+				}
+				if(loopPtr == firstPtr){
+					prevNode.setNext(null);
+					System.out.println("The loop is removed");
+					return;
+				}
+			}
+		}
+	}
+	
+	
+	public Node addNumberList(Node<Integer> operand1, Node<Integer> operand2){
+		SinglyLinkedList<Integer> sumList = new SinglyLinkedList<Integer>();
+		Node<Integer> curr1 = operand1, curr2=operand2; int sum = 0, carry = 0, count =0;
+		if(operand1 == null){
+			return operand2;
+		}else if(operand2 == null){
+			return operand1;
+		}else{
+			while(curr1 != null || curr2 != null){
+				if(curr1 == null){
+					sum = curr2.getItem()+carry;
+					curr2 = curr2.getNext();
+				}else if(curr2 == null){
+					sum = curr1.getItem()+carry;
+					curr1=curr1.getNext();
+				}else{
+					sum = curr1.getItem() + curr2.getItem() +carry;
+					curr1 = curr1.getNext();
+					curr2 = curr2.getNext();
+				}
+				if(sum < 9){
+					sumList.insertNode(new Node(sum), count++);
+					carry = 0;
+				}else{
+					sumList.insertNode(new Node(sum%10), count++);
+					carry = sum/10;
+				}
+			}
+			if(carry != 0){
+				sumList.insertNode(new Node(carry), count++);
+			}
+		}
+		return sumList.getList();
+	}
 	
 	/**
 	 * @param args
@@ -1498,6 +1556,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		sll.reverseRecursively();
 		sll.printList();
 		System.out.println(sll.isCyclicList());
+		sll.deleteAndRemoveLoop();
+		sll.printList();
 		System.out.println(sll.isPalindrom());
 		
 		sll.printList();
@@ -1523,6 +1583,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		nodez.setNext(nodex);
 		sll2.insertNode(nodex, 0);
 		System.out.println(sll2.isCyclicList());
+		sll2.deleteAndRemoveLoop();
+		sll2.printList();
 		
 		
 		SinglyLinkedList<Integer> sll3 = new SinglyLinkedList<Integer>();
@@ -1694,8 +1756,6 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla1.reverseInGroupAlternatively(2);
 		slla1.printList();
 		
-		
-		
 		System.out.println("Deleting alternative node recursively");
 		slla1.printList(slla1.deleteAlternateNodeRecursively(slla1.getList()));
 		
@@ -1716,9 +1776,18 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla3.printList();
 		slla3.deleteGreaterRight();
 		
+		SinglyLinkedList<Integer> slla4 = new SinglyLinkedList<Integer>();
+		slla4.insertNode(new Node(9), 0);
+		slla4.insertNode(new Node(9), 1);
+		slla4.insertNode(new Node(9), 2);
+		slla4.printList();
+		SinglyLinkedList<Integer> slla5 = new SinglyLinkedList<Integer>();
+		slla5.insertNode(new Node(9), 0);
+		slla5.insertNode(new Node(9), 1);
+		slla5.printList();
+		System.out.println("Adding 2 numbers");
+		slla5.printList(slla5.addNumberList(slla4.getList(), slla5.getList()));
 		
-		
-
 	}
 
 
