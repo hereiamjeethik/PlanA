@@ -1426,6 +1426,27 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 	}
 	
+	/**
+	 * This method add 2 numbers
+	 * @param list1
+	 * @param list2
+	 * @return
+	 */
+	public Node addNumberList2(Node<Integer> list1, Node<Integer> list2){
+		SinglyLinkedList<Integer> sll1 = new SinglyLinkedList<Integer>();
+		sll1.setList(list1);
+		sll1.reverseList();
+		Node<Integer> reversedList1 = sll1.getList();
+		SinglyLinkedList<Integer> sll2 = new SinglyLinkedList<Integer>();
+		sll2.setList(list2);
+		sll2.reverseList();
+		Node<Integer> reversedList2 = sll2.getList();
+		Node<Integer> sum = addNumberList(reversedList1, reversedList2);
+		SinglyLinkedList<Integer> sumList = new SinglyLinkedList<Integer>();
+		sumList.setList(sum);
+		sumList.reverseList();
+		return sumList.getList();
+	}
 	
 	
 	/**
@@ -1827,6 +1848,28 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla5.printList(slla5.addNumberList(slla4.getList(), slla5.getList()));
 		slla5.printList();
 		
+		slla5.printList(slla5.addNumberList2(slla4.getList(), slla5.getList()));
+		
+		
+		System.out.println("Flattening of lists");
+	/*	TwoNode tnode1 = new TwoNode(45, null, null);
+		TwoNode tnode2 = new TwoNode(40, null, tnode1);
+		TwoNode tnode3 = new TwoNode(35, null, tnode2);
+		TwoNode tnode5 = new TwoNode(50, null, null);
+		TwoNode tnode4 = new TwoNode(22, null, tnode5);
+		TwoNode tnode6 = new TwoNode(20, null, null);
+		TwoNode tnode7 = new TwoNode(30, null, null);
+		TwoNode tnode8 = new TwoNode(8, null, tnode7);
+		TwoNode tnode9 = new TwoNode(7, null, tnode8);
+		
+		
+		TwoNode tnode12 = new TwoNode(28, null, tnode3);
+		TwoNode tnode13 = new TwoNode(19,tnode12 ,tnode4);
+		TwoNode tnode11 = new TwoNode(10,tnode13,tnode4);
+		TwoNode tnode10 = new TwoNode(5, tnode11, tnode9);
+	*/
+		
+	
 		
 	}
 
