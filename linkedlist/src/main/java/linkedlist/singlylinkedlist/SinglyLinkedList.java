@@ -1450,6 +1450,43 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	
 	
 	/**
+	 * Given a linked list and two integers M and N. 
+	 * Traverse the linked list such that you retain M nodes then delete next N nodes,
+	 * continue the same till end of the linked list.
+	 * 
+	 * @param head
+	 * @param m
+	 * @param n
+	 * @return
+	 */
+	public Node deleteNNodeAfterMNode(Node head, int m, int n){
+		Node curr = head, prev = null;
+		int countM = 0;
+		int countN = 0;
+		while(countM < m && curr != null){
+			prev = curr;
+			curr= curr.getNext();
+			countM++;
+			if(countM == m){
+				countM=0;
+				while(countN < n && curr != null){
+					curr=curr.getNext();
+					countN++;
+				}
+				if(countN == n){
+					prev.setNext(curr);
+					countN = 0;
+				}else{
+					prev.setNext(null);
+				}
+			}
+		}
+		
+		return head;
+	}
+	
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -1852,24 +1889,19 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		
 		System.out.println("Flattening of lists");
-	/*	TwoNode tnode1 = new TwoNode(45, null, null);
-		TwoNode tnode2 = new TwoNode(40, null, tnode1);
-		TwoNode tnode3 = new TwoNode(35, null, tnode2);
-		TwoNode tnode5 = new TwoNode(50, null, null);
-		TwoNode tnode4 = new TwoNode(22, null, tnode5);
-		TwoNode tnode6 = new TwoNode(20, null, null);
-		TwoNode tnode7 = new TwoNode(30, null, null);
-		TwoNode tnode8 = new TwoNode(8, null, tnode7);
-		TwoNode tnode9 = new TwoNode(7, null, tnode8);
+
+		SinglyLinkedList<Integer> slla6 = new SinglyLinkedList<Integer>();
+		slla6.insertNode(new Node(1), 0);
+		slla6.insertNode(new Node(2), 1);
+		slla6.insertNode(new Node(3), 2);
+		slla6.insertNode(new Node(4), 3);
+		slla6.insertNode(new Node(5), 4);
+		slla6.insertNode(new Node(6), 5);
+		slla6.insertNode(new Node(7), 6);
+		slla6.insertNode(new Node(8), 7);
+		slla6.printList();
+		slla6.printList(slla6.deleteNNodeAfterMNode(slla6.getList(), 2, 3));
 		
-		
-		TwoNode tnode12 = new TwoNode(28, null, tnode3);
-		TwoNode tnode13 = new TwoNode(19,tnode12 ,tnode4);
-		TwoNode tnode11 = new TwoNode(10,tnode13,tnode4);
-		TwoNode tnode10 = new TwoNode(5, tnode11, tnode9);
-	*/
-		
-	
 		
 	}
 
