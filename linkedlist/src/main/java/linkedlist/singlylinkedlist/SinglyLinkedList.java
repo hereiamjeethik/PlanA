@@ -1485,6 +1485,34 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		return head;
 	}
 	
+	/**
+	 * This method will print list in alternatively
+	 * @param first
+	 * @param second
+	 */
+	public void mergeListAlternatively(Node first, Node second){
+		Node curr1 = first;
+		Node curr2 = second;
+		while(curr1 != null){
+			Node temp = null;
+			if(curr2 == null){
+				break;
+			}else{
+				temp = curr2;
+				curr2 = curr2.getNext();
+				second = curr2;
+			}
+			Node temp2 = curr1.getNext();
+			curr1.setNext(temp);
+			temp.setNext(temp2);
+			curr1 = temp2;
+		}
+		System.out.println("Printing Both the list");
+		printList(first);
+		printList(second);
+	}
+	
+	
 	
 	/**
 	 * @param args
@@ -1897,10 +1925,25 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla6.insertNode(new Node(4), 3);
 		slla6.insertNode(new Node(5), 4);
 		slla6.insertNode(new Node(6), 5);
-		slla6.insertNode(new Node(7), 6);
-		slla6.insertNode(new Node(8), 7);
+		
 		slla6.printList();
+		
+		SinglyLinkedList<Integer> slla7 = new SinglyLinkedList<Integer>();
+		slla7.insertNode(new Node(11), 0);
+		slla7.insertNode(new Node(22), 1);
+		slla7.insertNode(new Node(33), 2);
+		slla7.insertNode(new Node(44), 3);
+		slla7.insertNode(new Node(55), 4);
+		slla7.insertNode(new Node(66), 5);
+		slla7.insertNode(new Node(77), 6);
+		slla7.insertNode(new Node(88), 7);
+		slla7.printList();
+		
+		slla6.mergeListAlternatively(slla6.getList(), slla7.getList());
+		
+		
 		slla6.printList(slla6.deleteNNodeAfterMNode(slla6.getList(), 2, 3));
+		
 		
 		
 	}
