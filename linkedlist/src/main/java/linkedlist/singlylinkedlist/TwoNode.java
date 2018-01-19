@@ -2,16 +2,16 @@ package linkedlist.singlylinkedlist;
 
 public class TwoNode {
 	private int data;
-	private TwoNode right, down;
+	private TwoNode next, greater;
 	
 	public TwoNode(){
 		
 	}
 	
-	public TwoNode(int data, TwoNode right, TwoNode down){
+	public TwoNode(int data, TwoNode next, TwoNode greater){
 		this.data = data;
-		this.right = right;
-		this.down = down;
+		this.next = next;
+		this.greater = greater;
 	}
 
 	public int getData() {
@@ -22,20 +22,20 @@ public class TwoNode {
 		this.data = data;
 	}
 
-	public TwoNode getRight() {
-		return right;
+	public TwoNode getNext() {
+		return next;
 	}
 
-	public void setRight(TwoNode right) {
-		this.right = right;
+	public void setNext(TwoNode next) {
+		this.next = next;
 	}
 
-	public TwoNode getDown() {
-		return down;
+	public TwoNode getGreater() {
+		return greater;
 	}
 
-	public void setDown(TwoNode down) {
-		this.down = down;
+	public void setGreater(TwoNode greater) {
+		this.greater = greater;
 	}
 	
 	

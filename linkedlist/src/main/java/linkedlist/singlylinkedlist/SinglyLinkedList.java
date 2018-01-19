@@ -840,6 +840,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 	}
 	
+	/**
+	 * This method prints the list if you pass the head
+	 * @param head
+	 */
 	public void printList(Node<T> head){
 		Node<T> currNode = head;
 		System.out.println("Printing the list of nodes");
@@ -855,6 +859,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 		
 	}
+	
+	
 	
 	/**
 	 * print the list in a reverse order
@@ -1557,6 +1563,76 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		head = (Node)currHead;
 	}
 	
+	/**
+	 * This method Point to next higher value node in a linked list with an arbitrary pointer
+	 * @return
+	 */
+	public static TwoNode sortNextHigherValue(TwoNode head){
+		TwoNode curr = head;
+		TwoNode newCurr = curr;
+		while(curr != null){
+			newCurr = mergeSort(newCurr , curr);
+			curr = curr.getNext();
+		}
+		
+		return newCurr;
+	}
+	
+	/**
+	 * Merge the list based on greater value
+	 * @param head
+	 * @param newNode
+	 * @return
+	 */
+	public static TwoNode mergeSort(TwoNode head, TwoNode newNode){
+		TwoNode curr = head, prev = null;
+		if(head == newNode){
+			return head;
+		}
+		while(curr != null){
+			if(curr.getData() < newNode.getData()){
+				prev = curr;
+				curr = curr.getGreater();
+			}else{
+				if(prev == null){
+					newNode.setGreater(head);
+					head = newNode;
+					return head;
+				}else{
+					prev.setGreater(newNode);
+					newNode.setGreater(curr);
+					return head;
+				}
+				
+			}
+		}
+		if(curr == null){
+			prev.setGreater(newNode);
+		}
+		return head;
+	}
+	
+	/**
+	 * This method prints the value of 2 node list
+	 * @param head
+	 * @param usingNext
+	 */
+	public static void printTwoNode(TwoNode head, boolean usingNext){
+		System.out.println("Printing two pointer list based on next :"+usingNext);
+		TwoNode curr= head;
+		if(usingNext){
+			while(curr != null){
+				System.out.print(curr.getData()+" --> ");
+				curr = curr.getNext();
+			}
+		}else{
+			while(curr != null){
+				System.out.print(curr.getData()+" --> ");
+				curr=curr.getGreater();
+			}
+		}
+		System.out.println("");
+	}
 	
 	/**
 	 * @param args
@@ -1999,6 +2075,20 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla8.printList();
 		slla8.insertionSort();
 		slla8.printList();
+		
+		
+		TwoNode tnode1 = new TwoNode(5, null, null);
+		TwoNode tnode2 = new TwoNode(10, null, null);
+		TwoNode tnode3 = new TwoNode(2, null, null);
+		TwoNode tnode4 = new TwoNode(3, null, null);
+		tnode1.setNext(tnode2);
+		tnode2.setNext(tnode3);
+		tnode3.setNext(tnode4);
+		printTwoNode(tnode1, true);
+		TwoNode thead = sortNextHigherValue(tnode1);
+		printTwoNode(tnode1, true);
+		printTwoNode(thead, false);
+		
 		
 	}
 
