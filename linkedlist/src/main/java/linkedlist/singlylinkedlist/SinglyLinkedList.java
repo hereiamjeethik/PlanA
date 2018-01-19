@@ -1513,6 +1513,50 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	
+	/**
+	 * Insertion sort for the linked list
+	 */
+	public void insertionSort(){
+		Node<Integer> curr = (Node<Integer>)head, currHead = (Node<Integer>)head;
+		Node<Integer> prev = null, temp = null, next = null, temp1 = null, prevTemp = null;
+		if(curr != null){
+			prevTemp = curr;
+			temp = curr.getNext();
+		}
+		
+		while(temp != null){
+			while(temp.getItem() > curr.getItem()){
+				prev = curr;
+				curr = curr.getNext();
+			}
+			if(temp.getItem() < curr.getItem()){
+				if(prev == null){
+					prevTemp.setNext(temp.getNext());
+					next = temp.getNext();
+					temp.setNext(currHead);
+					currHead = temp;
+				}else{
+					prevTemp.setNext(temp.getNext());
+					next = temp.getNext();
+					temp1 = prev.getNext();
+					prev.setNext(temp);
+					temp.setNext(temp1);
+				}
+				prev = null;
+				curr = currHead;
+				temp = next;
+			}else if(temp.getItem() == curr.getItem()){
+				prevTemp = temp;
+				temp = temp.getNext();
+			}else{
+				prevTemp = temp;
+				temp = temp.getNext();
+			}
+			
+		}
+		head = (Node)currHead;
+	}
+	
 	
 	/**
 	 * @param args
@@ -1945,6 +1989,16 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla6.printList(slla6.deleteNNodeAfterMNode(slla6.getList(), 2, 3));
 		
 		
+		SinglyLinkedList<Integer> slla8 = new SinglyLinkedList<Integer>();
+		slla8.insertNode(new Node(4), 0);
+		slla8.insertNode(new Node(2), 1);
+		slla8.insertNode(new Node(1), 2);
+		slla8.insertNode(new Node(3), 3);
+		slla8.insertNode(new Node(5), 4);
+		slla8.insertNode(new Node(6), 5);
+		slla8.printList();
+		slla8.insertionSort();
+		slla8.printList();
 		
 	}
 
