@@ -1261,57 +1261,53 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	 * This method reverses the node group-wise alternatively
 	 */
 	public void reverseInGroupAlternatively(int groupBy){
-		System.out.println("Reverse in group "+groupBy);
-		Node curr = head, prev= null, next=null,secPrev= null,secStart= curr; 
-		int count = 0;
+		Node curr = head, secPrev = null, prev= null, temp = null, next = null;
 		boolean reverse = true;
-		while(curr != null && count < groupBy){
+		int count = 0;
+		while(curr != null){
 			if(reverse){
-				next = curr.getNext();
-				curr.setNext(prev);
-				prev= curr;
-				curr = next;
+				temp = curr;
+				prev= null;
+				while(curr != null && count < groupBy){
+					next = curr.getNext();
+					curr.setNext(prev);
+					prev = curr;
+					curr = next;
+					count++;
+				}
+				if(count == groupBy){
+					count =0;
+					if(secPrev==null){
+						head = prev;
+						secPrev = temp;
+						secPrev.setNext(curr);
+					}else{
+						secPrev.setNext(prev);
+						secPrev = temp;
+						secPrev.setNext(curr);
+					}
+				}
+				reverse = false;
 			}else{
-				secPrev = curr;
-				prev = curr;
-				curr = curr.getNext();
-				secStart = curr; 
-			}
-			
-			count++;
-			if(count == groupBy){
-				if(secPrev == null){
-					head = prev;
-					secPrev = secStart;
-					secPrev.setNext(curr);
-					secStart = curr;
-					prev = null;
-				}else{
-					secPrev.setNext(prev);
-					secPrev = secStart;
-					secStart = curr;
-					prev = null;
+				reverse = true;
+				prev = null;
+				while(curr != null && count < groupBy){
+					prev = curr;
+					curr = curr.getNext();
+					count++;
 				}
-				if(reverse){
-					reverse = false;
-				}else{
-					reverse = true;
-				}
-				if(curr == null){
-					break;
-				}else{
-					
+				if(count == groupBy){
+					count = 0;
+					secPrev = prev;
 				}
 				
 			}
 			
 		}
-		if(count != groupBy){
-			if(reverse){
-				secPrev.setNext(prev);
-			}
-			
-		}
+		
+		System.out.println("Printing the reverse in group alternatively");
+		this.printList(head);
+		
 	}
 	
 	public void deleteGreaterRight(){
@@ -1993,7 +1989,10 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla1.printList();
 		slla1.reverseInGroup2(6);
 		slla1.printList();
+		System.out.println("Reverse in Group alternatively");
 		slla1.reverseInGroupAlternatively(2);
+		slla1.insertNode(new Node(8), 8);
+		slla1.reverseInGroupAlternatively(3);
 		slla1.printList();
 		
 		System.out.println("Deleting alternative node recursively");
