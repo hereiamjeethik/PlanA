@@ -1729,6 +1729,24 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	
 	}
 	
+	/**
+	 * Point arbitrary pointer to greatest value right side node in a linked list
+	 * @param curr
+	 * @return
+	 */
+	public static TwoNode pointGreaterRight(TwoNode curr){
+		if(curr.getNext() == null){
+			return curr;
+		}else{
+			TwoNode greater = pointGreaterRight(curr.getNext());
+			curr.setGreater(greater);
+			if(curr.getData() > greater.getData()){
+				return curr;
+			}else{
+				return greater;
+			}
+		}
+	}
 	
 	
 	/**
@@ -2190,6 +2208,17 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		printTwoNode(tnode1, true);
 		printTwoNode(thead, false);
 		
+		TwoNode tnode11 = new TwoNode(5, null, null);
+		TwoNode tnode12 = new TwoNode(10, null, null);
+		TwoNode tnode13 = new TwoNode(2, null, null);
+		TwoNode tnode14 = new TwoNode(3, null, null);
+		tnode11.setNext(tnode12);
+		tnode12.setNext(tnode13);
+		tnode13.setNext(tnode14);
+		printTwoNode(tnode11, true);
+		pointGreaterRight(tnode11);
+		printTwoNode(tnode11, true);
+		printTwoNode(tnode11, false);
 		
 	}
 
