@@ -1750,6 +1750,51 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	
 	
 	/**
+	 * Sort linked list which is already sorted on absolute values
+	 * 
+	 * 	Input :  1 -> -10 
+		output: -10 -> 1
+		
+		Input : 1 -> -2 -> -3 -> 4 -> -5 
+		output: -5 -> -3 -> -2 -> 1 -> 4 
+		
+		Input : -5 -> -10 
+		Output: -10 -> -5
+		
+		Input : 5 -> 10 
+		output: 5 -> 10
+	 */
+	public void sortBasedOnSign(){
+		Node<Integer> curr = (Node<Integer>) head, prev= null;
+		while(curr != null){
+			if(curr == head){
+				prev= curr;
+				curr = curr.getNext();
+			}else{
+				if(curr.getItem() < 0){
+					if(curr.getNext() == null){
+						prev.setNext(null);
+						curr.setNext((Node<Integer>)head);
+						head = (Node)curr;
+						curr = null;
+					}else{
+						prev.setNext(curr.getNext());
+						curr.setNext((Node<Integer>)head);
+						head = (Node)curr;
+						curr = prev.getNext();
+					}
+			
+				}else{
+					prev= curr;
+					curr = curr.getNext();
+				}
+			}
+			
+		}
+		
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -2219,6 +2264,20 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		pointGreaterRight(tnode11);
 		printTwoNode(tnode11, true);
 		printTwoNode(tnode11, false);
+		
+		
+		SinglyLinkedList<Integer> slla9 = new SinglyLinkedList<Integer>();
+		slla9.insertNode(new Node(1), 0);
+		slla9.insertNode(new Node(-2), 1);
+		slla9.insertNode(new Node(-3), 2);
+		slla9.insertNode(new Node(4), 3);
+		slla9.insertNode(new Node(-5), 4);
+		slla9.insertNode(new Node(6), 5);
+		slla9.insertNode(new Node(7), 6);
+		slla9.insertNode(new Node(-8), 7);
+		slla9.printList();
+		slla9.sortBasedOnSign();
+		slla9.printList();
 		
 	}
 
