@@ -1563,9 +1563,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	 * This method Point to next higher value node in a linked list with an arbitrary pointer
 	 * @return
 	 */
-	public static TwoNode sortNextHigherValue(TwoNode head){
-		TwoNode curr = head;
-		TwoNode newCurr = curr;
+	public static TwoPointerNode sortNextHigherValue(TwoPointerNode head){
+		TwoPointerNode curr = head;
+		TwoPointerNode newCurr = curr;
 		while(curr != null){
 			newCurr = mergeSort(newCurr , curr);
 			curr = curr.getNext();
@@ -1580,8 +1580,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	 * @param newNode
 	 * @return
 	 */
-	public static TwoNode mergeSort(TwoNode head, TwoNode newNode){
-		TwoNode curr = head, prev = null;
+	public static TwoPointerNode mergeSort(TwoPointerNode head, TwoPointerNode newNode){
+		TwoPointerNode curr = head, prev = null;
 		if(head == newNode){
 			return head;
 		}
@@ -1613,9 +1613,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	 * @param head
 	 * @param usingNext
 	 */
-	public static void printTwoNode(TwoNode head, boolean usingNext){
+	public static void printTwoNode(TwoPointerNode head, boolean usingNext){
 		System.out.println("Printing two pointer list based on next :"+usingNext);
-		TwoNode curr= head;
+		TwoPointerNode curr= head;
 		if(usingNext){
 			while(curr != null){
 				System.out.print(curr.getData()+" --> ");
@@ -1734,11 +1734,11 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	 * @param curr
 	 * @return
 	 */
-	public static TwoNode pointGreaterRight(TwoNode curr){
+	public static TwoPointerNode pointGreaterRight(TwoPointerNode curr){
 		if(curr.getNext() == null){
 			return curr;
 		}else{
-			TwoNode greater = pointGreaterRight(curr.getNext());
+			TwoPointerNode greater = pointGreaterRight(curr.getNext());
 			curr.setGreater(greater);
 			if(curr.getData() > greater.getData()){
 				return curr;
@@ -2196,22 +2196,22 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla8.zigZagLinkedList();
 		slla8.printList();
 		
-		TwoNode tnode1 = new TwoNode(5, null, null);
-		TwoNode tnode2 = new TwoNode(10, null, null);
-		TwoNode tnode3 = new TwoNode(2, null, null);
-		TwoNode tnode4 = new TwoNode(3, null, null);
+		TwoPointerNode tnode1 = new TwoPointerNode(5, null, null);
+		TwoPointerNode tnode2 = new TwoPointerNode(10, null, null);
+		TwoPointerNode tnode3 = new TwoPointerNode(2, null, null);
+		TwoPointerNode tnode4 = new TwoPointerNode(3, null, null);
 		tnode1.setNext(tnode2);
 		tnode2.setNext(tnode3);
 		tnode3.setNext(tnode4);
 		printTwoNode(tnode1, true);
-		TwoNode thead = sortNextHigherValue(tnode1);
+		TwoPointerNode thead = sortNextHigherValue(tnode1);
 		printTwoNode(tnode1, true);
 		printTwoNode(thead, false);
 		
-		TwoNode tnode11 = new TwoNode(5, null, null);
-		TwoNode tnode12 = new TwoNode(10, null, null);
-		TwoNode tnode13 = new TwoNode(2, null, null);
-		TwoNode tnode14 = new TwoNode(3, null, null);
+		TwoPointerNode tnode11 = new TwoPointerNode(5, null, null);
+		TwoPointerNode tnode12 = new TwoPointerNode(10, null, null);
+		TwoPointerNode tnode13 = new TwoPointerNode(2, null, null);
+		TwoPointerNode tnode14 = new TwoPointerNode(3, null, null);
 		tnode11.setNext(tnode12);
 		tnode12.setNext(tnode13);
 		tnode13.setNext(tnode14);
