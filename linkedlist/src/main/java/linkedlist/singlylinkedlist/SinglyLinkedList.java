@@ -1631,6 +1631,107 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	/**
+	 * Given a linked list, rearrange it such that converted list should be of the form a < b > c < d > e < f .. where a, b, c.. are consecutive data node of linked list. Examples :
+
+		Input:  1->2->3->4
+		Output: 1->3->2->4 
+
+		Input:  11->15->20->5->10
+		Output: 11->20->5->15->10
+	 */
+	
+	public void zigZagLinkedList(){
+		Node<Integer> curr = (Node<Integer>) head;
+		Node<Integer> prev = null;
+		while(curr != null && curr.getNext() != null ){
+			if(curr.getItem() > curr.getNext().getItem()){
+				if(curr.getNext().getNext() == null){
+					return;
+				}else{
+					if(curr.getNext().getNext().getItem() > curr.getNext().getItem()){
+						curr = curr.getNext();
+					}else{
+						swap(head, curr.getNext(), curr.getNext().getNext());
+						curr = curr.getNext();
+					}
+				}
+			}else{
+				if(curr.getNext().getNext() == null){
+					return;
+				}else{
+					if(curr.getNext().getNext().getItem() < curr.getNext().getItem()){
+						curr = curr.getNext();
+					}else{
+						swap(head, curr.getNext(), curr.getNext().getNext());
+						curr = curr.getNext();
+					}
+				}
+			}
+		}
+		
+	}
+	
+	public void swap(Node head, Node curr1, Node curr2){
+		System.out.println("Swapping "+curr1+" "+curr2);
+		Node<T> currNode = head, prevNode = null, firstPrevNode = null, secondPrevNode = null;
+		boolean isFirstNode = true;
+		while(currNode != null){
+			if(currNode.getItem().equals(curr1.getItem()) || currNode.getItem().equals(curr2.getItem())){
+				if(isFirstNode){
+					firstPrevNode = prevNode;
+					isFirstNode = false;
+				}else{
+					secondPrevNode = prevNode;
+					break;
+				}
+			}
+			prevNode = currNode;
+			currNode = currNode.getNext();
+		}
+		if(secondPrevNode == null){
+			System.out.println("Either of the node is not in the list");
+			return;
+		}
+		if(firstPrevNode != null){   // first node is not the head
+			if(secondPrevNode.equals(firstPrevNode.getNext())){
+				firstPrevNode.setNext(secondPrevNode.getNext());
+				secondPrevNode.setNext(secondPrevNode.getNext().getNext());
+				firstPrevNode.getNext().setNext(secondPrevNode);
+			}else{
+				Node<T> temp1 = firstPrevNode.getNext();
+				Node<T> temp2 = temp1.getNext();
+				Node<T> temp3 = secondPrevNode.getNext();
+				Node<T> temp4 = temp3.getNext();
+				
+				firstPrevNode.setNext(temp3);
+				temp3.setNext(temp2);
+				secondPrevNode.setNext(temp1);
+				temp1.setNext(temp4);
+			}
+		}else{  // first node is the head
+			if(secondPrevNode.equals(head)){
+				head = secondPrevNode.getNext();
+				secondPrevNode.setNext(head.getNext());
+				head.setNext(secondPrevNode);
+			}else{
+				Node<T> temp1 = head;
+				Node<T> temp2 = temp1.getNext();
+				Node<T> temp3 = secondPrevNode.getNext();
+				Node<T> temp4 = temp3.getNext();
+				
+				head = temp3;
+				temp3.setNext(temp2);
+				secondPrevNode.setNext(temp1);
+				temp1.setNext(temp4);
+				
+			}
+		}
+	
+	}
+	
+	
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -2074,7 +2175,8 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		slla8.printList();
 		slla8.insertionSort();
 		slla8.printList();
-		
+		slla8.zigZagLinkedList();
+		slla8.printList();
 		
 		TwoNode tnode1 = new TwoNode(5, null, null);
 		TwoNode tnode2 = new TwoNode(10, null, null);
