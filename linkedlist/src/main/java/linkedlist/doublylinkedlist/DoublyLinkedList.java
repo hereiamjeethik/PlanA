@@ -48,11 +48,28 @@ public class DoublyLinkedList<T> {
 			curr.setNext(newNode);
 			newNode.setPrev(curr);
 			newNode.setNext(temp);
-			temp.setPrev(newNode);
+			if(temp != null){
+				temp.setPrev(newNode);
+			}
+			
 		}else{
-			prev.setNext(newNode);
-			newNode.setPrev(prev);
+			if(prev==null){
+				this.setHead(newNode);
+			}else{
+				prev.setNext(newNode);
+				newNode.setPrev(prev);
+			}
+			
 		}
+	}
+	
+	public void printList(){
+		Node <T> curr = getHead();
+		while(curr != null){
+			System.out.print(curr.getItem()+" <--> ");
+			curr = curr.getNext();
+		}
+		System.out.println("");
 	}
 
 
@@ -60,8 +77,15 @@ public class DoublyLinkedList<T> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		DoublyLinkedList<Integer> dll = new DoublyLinkedList<Integer>();
+		dll.insertAtPosition(new Node(1), 0);
+		dll.insertAtPosition(new Node(2), 1);
+		dll.insertAtPosition(new Node(3), 2);
+		dll.insertAtPosition(new Node(4), 3);
+		dll.insertAtPosition(new Node(5), 4);
+		dll.insertAtPosition(new Node(6), 5);
 		
-
+		dll.printList();
 	}
 
 }
