@@ -63,13 +63,58 @@ public class DoublyLinkedList<T> {
 		}
 	}
 	
+	/**
+	 * This method prints the list
+	 */
 	public void printList(){
+		System.out.println("Printing the list of nodes");
 		Node <T> curr = getHead();
 		while(curr != null){
 			System.out.print(curr.getItem()+" <--> ");
 			curr = curr.getNext();
 		}
 		System.out.println("");
+	}
+	
+	/**
+	 * This method prints the list
+	 */
+	public void printList(Node<T> head){
+		System.out.println("Printing the list of nodes");
+		Node <T> curr = head;
+		while(curr != null){
+			System.out.print(curr.getItem()+" <--> ");
+			curr = curr.getNext();
+		}
+		System.out.println("");
+	}
+	
+	/**
+	 * This method will delete the node in the linked list using the given key
+	 */
+	public void deleteNodeUsingKey(T t){
+		System.out.println("Deleting the node "+t+" from the list");
+		Node<T> curr = getHead();
+		while(curr != null){
+			if(curr.getItem().equals(t)){
+				if(curr.getPrev() == null){
+					this.setHead(curr.getNext());
+					if(curr.getNext() != null){
+						curr.getNext().setPrev(null);
+					}
+				}else{
+					Node<T> temp = curr.getPrev();
+					Node<T> next = curr.getNext();
+					temp.setNext(next);
+					if(next != null){
+						next.setPrev(temp);
+					}
+				}
+				return;
+			}else{
+				curr = curr.getNext();
+			}
+		}
 	}
 
 
@@ -85,6 +130,12 @@ public class DoublyLinkedList<T> {
 		dll.insertAtPosition(new Node(5), 4);
 		dll.insertAtPosition(new Node(6), 5);
 		
+		dll.printList();
+		dll.deleteNodeUsingKey(2);
+		dll.printList();
+		dll.deleteNodeUsingKey(1);
+		dll.printList();
+		dll.deleteNodeUsingKey(6);
 		dll.printList();
 	}
 
