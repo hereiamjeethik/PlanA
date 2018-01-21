@@ -1794,21 +1794,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 		
 	}
 	
-	/**
-	 * Iterating over the circular singly linked list and printing it.
-	 */
-	public void printCircularList(){
-		Node curr = head;
-		if(curr != null){
-			System.out.print(curr.getItem() +" --> ");
-			curr = curr.getNext();
-		}
-		while(curr != head){
-			System.out.print(curr.getItem() + " --> ");
-			curr = curr.getNext();
-		}
-		System.out.println("");
-	}
+
+	
+	
 	
 	/**
 	 * @param args
