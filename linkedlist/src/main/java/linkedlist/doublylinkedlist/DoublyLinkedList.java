@@ -139,6 +139,76 @@ public class DoublyLinkedList<T> {
 	}
 
 	/**
+	 * swap the nodes from both the ends in a given position
+	 * @param position
+	 */
+	public void swapKthNodeFromBothEnds(int position){
+		System.out.println("Swapping "+position+"th node from both the ends");
+		Node<T> currStart = getHead();
+		Node<T> currEnd = getTail();
+		int count = 0;
+		while(currStart != null && currEnd != null  && count < position){
+			currStart = currStart.getNext();
+			currEnd = currEnd.getPrev();
+			count++;
+		}
+		if(count == position){
+			if(currStart == currEnd){
+				return;
+			}else{
+				if(currStart.getNext() == currEnd){
+					Node<T> temp1 = currStart.getPrev();
+					Node<T> temp2 = currEnd.getNext();
+					temp1.setNext(currEnd);
+					currEnd.setPrev(temp1);
+					currStart.setNext(temp2);
+					temp2.setPrev(currStart);
+					currStart.setPrev(currEnd);
+					currEnd.setNext(currStart);
+				}else if(currStart.getPrev() == currEnd){
+					Node<T> temp1 = currStart.getNext();
+					Node<T> temp2 = currEnd.getPrev();
+					temp2.setNext(currStart);
+					currStart.setPrev(temp2);
+					temp1.setPrev(currEnd);
+					currEnd.setNext(temp1);
+					currStart.setNext(currEnd);
+					currEnd.setPrev(currStart);
+					
+				}else if(currEnd.getNext() == null){
+					Node<T> temp1 = currEnd.getPrev();
+					Node<T> temp2 = currStart.getNext();
+					currStart.setPrev(temp1);
+					temp1.setNext(currStart);
+					currEnd.setNext(temp2);
+					temp2.setPrev(currEnd);
+					currStart.setNext(null);
+					currEnd.setPrev(null);
+					setHead(currEnd);
+					setTail(currStart);
+				}else{
+					Node<T> temp1 = currEnd.getNext();
+					Node<T> temp2 = currStart.getPrev();
+					temp1.setPrev(currStart);
+					currStart.setNext(temp1);
+					temp2.setNext(currEnd);
+					currEnd.setPrev(temp2);
+					currEnd.setNext(null);
+					currStart.setPrev(null);
+					setTail(currEnd);
+					setHead(currStart);
+				}
+				return;
+			}
+		}else{
+			System.out.println("There are not enough nodes in the list");
+			return;
+		}
+		
+	}
+	
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -158,6 +228,14 @@ public class DoublyLinkedList<T> {
 		dll.deleteNodeUsingKey(6);
 		dll.printList();
 		dll.reverseList();
+		dll.printList();
+		dll.swapKthNodeFromBothEnds(0);
+		dll.printList();
+		dll.swapKthNodeFromBothEnds(1);
+		dll.printList();
+		dll.swapKthNodeFromBothEnds(2);
+		dll.printList();
+		dll.swapKthNodeFromBothEnds(3);
 		dll.printList();
 	}
 
