@@ -117,6 +117,26 @@ public class DoublyLinkedList<T> {
 		}
 	}
 
+	/**
+	 * This method reverses the linked list
+	 */
+	public void reverseList(){
+		Node<T> curr = getHead();
+		while(curr != null){
+			Node<T> prev = curr.getPrev();
+			Node<T> next = curr.getNext();
+			curr.setNext(prev);
+			curr.setPrev(next);
+			if(prev == null){
+				setTail(curr);
+			}
+			
+			if(next == null){
+				setHead(curr);
+			}
+			curr = curr.getPrev();
+		}
+	}
 
 	/**
 	 * @param args
@@ -136,6 +156,8 @@ public class DoublyLinkedList<T> {
 		dll.deleteNodeUsingKey(1);
 		dll.printList();
 		dll.deleteNodeUsingKey(6);
+		dll.printList();
+		dll.reverseList();
 		dll.printList();
 	}
 
