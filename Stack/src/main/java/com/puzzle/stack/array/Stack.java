@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class Stack <Item> implements Iterable<Item>{
 	private int top = -1;
 	@SuppressWarnings("unchecked")
-	private Item[] array = (Item[]) new Object[5];
+	private Item[] array = (Item[]) new Object[100];
 	
 	public boolean isEmpty(){
 		if(top == -1){
