@@ -54,9 +54,33 @@ public class TestStack {
 		numStack.push(3);
 		numStack.push(4);
 		Iterator<Integer> stackIterator = numStack.iterator();
+		System.out.println("Validating Iterator");
 		while(stackIterator.hasNext()){
 			System.out.println(stackIterator.next());
 		}
 		Assert.assertFalse(stackIterator.hasNext());
+	}
+	
+	@Test
+	public void validatingResize(){
+		Stack<Integer> numStack = new Stack<Integer>();
+		numStack.push(1);
+		numStack.push(2);
+		numStack.push(3);
+		numStack.push(4);
+		numStack.push(5);
+		numStack.push(6);
+		numStack.push(7);
+		numStack.push(8);
+		numStack.push(9);
+		numStack.push(10);
+		numStack.push(11);
+		Assert.assertFalse(numStack.isEmpty());
+		Iterator<Integer> stackIterator = numStack.iterator();
+		System.out.println("Validating Resizable array");
+		while(stackIterator.hasNext()){
+			System.out.println(stackIterator.next());
+		}
+		
 	}
 }

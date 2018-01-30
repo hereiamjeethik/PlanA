@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class Stack <Item> implements Iterable<Item>{
 	private int top = -1;
 	@SuppressWarnings("unchecked")
-	private Item[] array = (Item[]) new Object[100];
+	private Item[] array = (Item[]) new Object[5];
 	
 	public boolean isEmpty(){
 		if(top == -1){
@@ -28,6 +28,8 @@ public class Stack <Item> implements Iterable<Item>{
 			array[++top] = newItem;
 		}else{
 			Item[] newArray = (Item[])new Object[array.length*2];
+			System.out.println("Content is copied to another array");
+			System.out.println("Resizable array");
 			System.arraycopy(array, 0, newArray, 0, array.length);
 			array = newArray;
 			array[++top] = newItem;
