@@ -26,6 +26,7 @@ public class TestListStack {
 		numberStack.push(serialNumber);
 		Assert.assertFalse(numberStack.isEmpty());
 		Assert.assertTrue(numberStack.pop().equals(1));
+		Assert.assertTrue(numberStack.pop() == null);
 	}
 	
 	@Test
