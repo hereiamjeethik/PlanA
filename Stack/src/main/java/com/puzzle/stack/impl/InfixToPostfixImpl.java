@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import com.puzzle.stack.array.Stack;
 
-public class StackImpl {
+public class InfixToPostfixImpl {
 	
 	public int postfix(char[] array, int position, char append, Stack<Character> myStack){
 		while(position < array.length){
@@ -73,9 +73,10 @@ public class StackImpl {
 		return Integer.MAX_VALUE;
 	}
 	
+	
 	public static void main(String[] args) {
 		String testString = "c*(a+b)-d/(e-f)";
-		StackImpl obj = new StackImpl();
+		InfixToPostfixImpl obj = new InfixToPostfixImpl();
 		Stack<Character> myStack = new Stack<Character>();
 		obj.postfix(testString.toCharArray(), 0, '.', myStack);
 
