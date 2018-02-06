@@ -58,7 +58,7 @@ public class Stack <Item> implements Iterable<Item>{
 		Iterator<Item> stackIterator = new Iterator<Item>() {
 			int tempTop = top;
 			public boolean hasNext() {
-				if(tempTop == -1){
+				if(tempTop <= -1){
 					return false;
 				}
 				return true;
