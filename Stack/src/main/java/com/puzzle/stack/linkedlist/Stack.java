@@ -63,6 +63,11 @@ public class Stack <Item> implements Iterable<Item>{
 				tempTop = tempTop.getNext();
 				return returnItem.getItem();
 			}
+
+			public void remove() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		return listIterator;
 	}

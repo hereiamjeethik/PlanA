@@ -82,6 +82,30 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	
 	
+	public void insertNodeAtEnd(Node<T> newNode){
+		if(head == null){
+			head = newNode;
+		}else{
+			Node<T> currNode = head;
+			Node<T> prevNode = null;
+			while(currNode != null){
+				prevNode = currNode;
+				currNode = currNode.getNext();
+			}
+			prevNode.setNext(newNode);
+		}
+	}
+	
+	public void insertNodeAtHead(Node<T> newNode){
+		if(head == null){
+			head = newNode;
+		}else{
+			newNode.setNext(head);
+			head = newNode;
+		}
+	}
+	
+	
 	/**
 	 * @param t
 	 * 

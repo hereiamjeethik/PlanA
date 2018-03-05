@@ -1,6 +1,6 @@
 package linkedlist.singlylinkedlist;
 
-import org.junit.Assert;
+import org.junit.*;
 import org.junit.Test;
 
 public class NodeTest {
@@ -20,6 +20,6 @@ public class NodeTest {
 		Node<Integer> node2 = new Node<Integer>();
 		node1.setItem(1);
 		node2.setItem(1);
-		Assert.assertFalse(node1.compareTo(node2) == 0);
+		Assert.assertTrue(node1.compareTo(node2) == 0);
 	}
 }

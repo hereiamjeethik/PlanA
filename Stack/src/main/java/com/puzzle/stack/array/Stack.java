@@ -67,6 +67,11 @@ public class Stack <Item> implements Iterable<Item>{
 			public Item next() {
 				return array[tempTop--];
 			}
+
+			public void remove() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		return stackIterator;
 	}
